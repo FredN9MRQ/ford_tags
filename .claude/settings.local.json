@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ping:*)",
+      "Bash(ssh:*)",
+      "Bash(curl:*)",
+      "Bash(scp:*)",
+      "Bash(ipconfig:*)",
+      "Bash(findstr:*)",
+      "Bash(pkill:*)",
+      "Bash(rm:*)",
+      "Bash(dir \"%USERPROFILE%\\.ssh\\id_*.pub\")",
+      "Bash(ssh-keygen:*)",
+      "Bash(cat:*)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(git init:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git reset:*)"
+    ]
+  }
+}

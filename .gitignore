@@ -1,0 +1,15 @@
+# Ignore embedded git repositories (manage separately)
+VA-Strategy/
+claude-code-history/
+claude-workflows/
+config/
+infrastructure/
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Temp files
+*.tmp
+*.temp
+nul

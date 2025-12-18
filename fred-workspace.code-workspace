@@ -1,0 +1,36 @@
+{
+  "folders": [
+    {
+      "path": "claude-workflows",
+      "name": "🎯 Claude Workflows"
+    },
+    {
+      "path": "VA-Strategy",
+      "name": "🏥 VA Strategy"
+    },
+    {
+      "path": "infrastructure",
+      "name": "🏠 Infrastructure"
+    },
+    {
+      "path": "config",
+      "name": "⚙️ Config"
+    }
+  ],
+  "settings": {
+    "files.exclude": {
+      "**/node_modules": true,
+      "**/.git": false,
+      "**/claude-code-history": true
+    },
+    "search.exclude": {
+      "**/node_modules": true,
+      "**/claude-code-history": true
+    },
+    "files.watcherExclude": {
+      "**/node_modules/**": true,
+      "**/claude-code-history/**": true
+    },
+    "powershell.cwd": "🏠 Infrastructure"
+  }
+}
