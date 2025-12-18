@@ -1,0 +1,41 @@
+# Generated STL files
+*.stl
+
+# Build artifacts
+*.o
+*.obj
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Node.js (if accidentally included)
+node_modules/
+*.tar.xz
+*.tar.gz
+
+# Temporary files
+*~
+*.tmp
+*.temp
+test_output.stl

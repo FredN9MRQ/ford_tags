@@ -1,0 +1,156 @@
+# Voice Assistant Automations
+
+# Morning Briefing - Proactive announcement
+- id: morning_briefing
+  alias: "Voice Assistant - Morning Briefing"
+  description: "Announces weather, calendar, and tasks in the morning"
+  trigger:
+    - platform: time
+      at: "07:00:00"
+  condition:
+    - condition: state
+      entity_id: person.your_name  # Change to your person entity
+      state: "home"
+  action:
+    - service: tts.speak
+      data:
+        entity_id: media_player.surface_go  # Your Surface Go media player
+        message: >
+          Good morning! {{ now().strftime('%A, %B %d') }}.
+          The weather today will be {{ states('weather.local_weather') | replace('_', ' ') }},
+          with a high of {{ state_attr('weather.local_weather', 'temperature') }} degrees.
+          {% set events = state_attr('calendar.your_calendar', 'all_events') %}
+          {% if events %}
+            You have {{ events | count }} calendar events today.
+          {% else %}
+            You have no scheduled events today.
+          {% endif %}
+          {% set tasks = states.todo | selectattr('state', 'eq', 'on') | list | count %}
+          {% if tasks > 0 %}
+            You have {{ tasks }} pending tasks.
+          {% endif %}
+
+# Upcoming Event Reminder (15 minutes before)
+- id: event_reminder
+  alias: "Voice Assistant - Event Reminder"
+  description: "Reminds about upcoming calendar events"
+  trigger:
+    - platform: calendar
+      event: start
+      offset: "-00:15:00"
+      entity_id: calendar.your_calendar
+  action:
+    - service: tts.speak
+      data:
+        entity_id: media_player.surface_go
+        message: >
+          Reminder: {{ trigger.calendar_event.summary }} starts in 15 minutes.
+
+# End of Day Summary
+- id: end_of_day_summary
+  alias: "Voice Assistant - End of Day Summary"
+  description: "Provides summary of completed and pending tasks"
+  trigger:
+    - platform: time
+      at: "21:00:00"
+  condition:
+    - condition: state
+      entity_id: person.your_name
+      state: "home"
+  action:
+    - service: tts.speak
+      data:
+        entity_id: media_player.surface_go
+        message: >
+          Good evening!
+          {% set tasks = states.todo | selectattr('state', 'eq', 'on') | list | count %}
+          {% if tasks > 0 %}
+            You still have {{ tasks }} pending tasks for tomorrow.
+          {% else %}
+            All tasks completed. Great job today!
+          {% endif %}
+
+# Task Due Today Reminder
+- id: task_due_reminder
+  alias: "Voice Assistant - Task Due Today"
+  description: "Reminds about tasks due today"
+  trigger:
+    - platform: time
+      at: "09:00:00"
+  condition:
+    - condition: template
+      value_template: >
+        {{ states.todo | selectattr('state', 'eq', 'on') | list | count > 0 }}
+  action:
+    - service: tts.speak
+      data:
+        entity_id: media_player.surface_go
+        message: >
+          You have {{ states.todo | selectattr('state', 'eq', 'on') | list | count }} tasks to complete today.
+
+# Weather Alert
+- id: weather_alert
+  alias: "Voice Assistant - Weather Alert"
+  description: "Announces significant weather changes"
+  trigger:
+    - platform: state
+      entity_id: weather.local_weather
+      to:
+        - "rainy"
+        - "snowy"
+        - "lightning-rainy"
+  action:
+    - service: tts.speak
+      data:
+        entity_id: media_player.surface_go
+        message: >
+          Weather alert: {{ states('weather.local_weather') | replace('_', ' ') | title }} expected.
+          You may want to prepare accordingly.
+
+# LLM Service Health Check
+- id: llm_health_check
+  alias: "Voice Assistant - LLM Health Check"
+  description: "Checks if Ollama service is running"
+  trigger:
+    - platform: homeassistant
+      event: start
+    - platform: time_pattern
+      hours: "/1"  # Every hour
+  action:
+    - service: shell_command.check_ollama
+      continue_on_error: true
+
+# Voice Satellite Connected
+- id: satellite_connected
+  alias: "Voice Assistant - Satellite Connected"
+  description: "Announces when voice satellite connects"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.surface_go_satellite
+      to: "on"
+  action:
+    - service: tts.speak
+      data:
+        entity_id: media_player.surface_go
+        message: "Voice assistant ready."
+
+# Project Deadline Approaching
+- id: project_deadline_alert
+  alias: "Voice Assistant - Project Deadline"
+  description: "Alerts about approaching project deadlines"
+  trigger:
+    - platform: time
+      at: "17:00:00"
+  condition:
+    - condition: template
+      value_template: >
+        {{ states.todo | selectattr('attributes.due_date', 'defined') |
+           selectattr('attributes.due_date', 'lt', (now() + timedelta(days=3)).date()) |
+           list | count > 0 }}
+  action:
+    - service: tts.speak
+      data:
+        entity_id: media_player.surface_go
+        message: >
+          You have tasks with deadlines in the next 3 days.
+          Would you like to review them?

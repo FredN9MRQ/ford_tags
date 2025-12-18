@@ -1,0 +1,11 @@
+# ESPHome build artifacts
+.esphome/
+*.bin
+*.elf
+*.map
+
+# Secrets
+secrets.yaml
+
+# Logs
+*.log

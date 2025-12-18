@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python:*)",
+      "Bash(dir:*)",
+      "Bash(\"C:\\Program Files\\OpenSCAD\\openscad.exe\" -D \"name=\"\"Test\"\"\" -o test_output.stl nameplate_template.scad)",
+      "Bash(\"C:\\Program Files\\OpenSCAD\\openscad.exe\" -o checkmark_test.stl checkmark_template.scad)",
+      "Bash(\"C:\\Program Files\\OpenSCAD\\openscad.exe\" -D \"name=\"\"Test\"\"\" -o test_hole_position.stl zipper_pull_template.scad)",
+      "Bash(\"C:\\Program Files\\OpenSCAD\\openscad.exe\" -D \"name=\"\"Christopher\"\"\" -o test_christopher.stl zipper_pull_template.scad)",
+      "Bash(\"C:\\Program Files\\OpenSCAD\\openscad.exe\" -D \"name=\"\"Christopher\"\"\" -o test_christopher_13pt.stl zipper_pull_template.scad)",
+      "Bash(\"C:\\Program Files\\OpenSCAD\\openscad.exe\" -D \"name=\"\"Fred\"\"\" -o test_fred_bold.stl zipper_pull_template.scad)",
+      "Bash(\"C:\\Program Files\\OpenSCAD\\openscad.exe\" -D \"name=\"\"Zoe\"\"\" -o test_zoe.stl zipper_pull_template.scad)",
+      "Bash(\"C:\\Program Files\\OpenSCAD\\openscad.exe\" -D \"name=\"\"Fred\"\"\" -o test_fred_dynamic.stl zipper_pull_template.scad)",
+      "Bash(\"C:\\Program Files\\OpenSCAD\\openscad.exe\" -D \"name=\"\"Christopher\"\"\" -o test_christopher_dynamic.stl zipper_pull_template.scad)",
+      "Bash(timeout:*)",
+      "Bash(\"C:\\Program Files\\OpenSCAD\\openscad.exe\" -D \"name=\"\"Zoe\"\"\" -o test_zoe_raised.stl zipper_pull_raised_text_template.scad)",
+      "Bash(\"C:\\Program Files\\OpenSCAD\\openscad.exe\" -D \"name=\"\"Fred\"\"\" -o test_fred_raised.stl zipper_pull_raised_text_template.scad)",
+      "Bash(\"C:\\Program Files\\OpenSCAD\\openscad.exe\" -D \"name=\"\"Christopher\"\"\" -o test_christopher_raised.stl zipper_pull_raised_text_template.scad)",
+      "Bash(\"C:\\Program Files\\OpenSCAD\\openscad.exe\" -D \"name=\"\"Fred\"\"\" -D \"base_text_size=13\" -o test_fred_debug.stl zipper_pull_raised_text_template.scad)",
+      "Bash(\"C:\\Program Files\\OpenSCAD\\openscad.exe\" -o test_simple_fred.stl test_simple_fred.scad)",
+      "Bash(\"C:\\Program Files\\OpenSCAD\\openscad.exe\" -D \"name=\"\"Fred\"\"\" -o test_fred_reduced_bold.stl zipper_pull_raised_text_template_REDUCED_BOLD.scad)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

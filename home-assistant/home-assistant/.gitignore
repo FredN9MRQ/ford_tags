@@ -1,0 +1,19 @@
+# Ignore files with sensitive data
+secrets.yaml
+
+# Ignore Home Assistant specific files that shouldn't be in git
+*.db
+*.db-shm
+*.db-wal
+*.log
+*.pid
+.storage/
+.cloud/
+.google.token
+deps/
+tts/
+www/
+*.pyc
+__pycache__/
+.uuid
+known_devices.yaml

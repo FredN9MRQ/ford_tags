@@ -1,0 +1,850 @@
+2025-11-03 11:04:27.683 WARNING (SyncWorker_0) [homeassistant.loader] We found a custom integration shelly which has not been tested by Home Assistant. This component might cause stability problems, be sure to disable it if you experience issues with Home Assistant
+2025-11-03 11:04:27.684 WARNING (SyncWorker_0) [homeassistant.loader] We found a custom integration hacs which has not been tested by Home Assistant. This component might cause stability problems, be sure to disable it if you experience issues with Home Assistant
+2025-11-03 11:04:27.685 WARNING (SyncWorker_0) [homeassistant.loader] We found a custom integration frigate which has not been tested by Home Assistant. This component might cause stability problems, be sure to disable it if you experience issues with Home Assistant
+2025-11-03 11:04:27.686 WARNING (SyncWorker_0) [homeassistant.loader] We found a custom integration openmediavault which has not been tested by Home Assistant. This component might cause stability problems, be sure to disable it if you experience issues with Home Assistant
+2025-11-03 11:04:28.506 WARNING (Recorder) [homeassistant.components.recorder.util] The system could not validate that the sqlite3 database at //config/home-assistant_v2.db was shutdown cleanly
+2025-11-03 11:04:28.529 WARNING (Recorder) [homeassistant.components.recorder.util] Ended unfinished session (id=15 from 2025-10-30 04:07:30.518983)
+2025-11-03 11:04:34.469 WARNING (MainThread) [aioesphomeapi.reconnect_logic] Can't connect to ESPHome API for xiao-printer-cam @ 10.0.0.152: Error connecting to [AddrInfo(family=<AddressFamily.AF_INET: 2>, type=<SocketKind.SOCK_STREAM: 1>, proto=6, sockaddr=IPv4Sockaddr(address='10.0.0.152', port=6053))]: [Errno 113] Connect call failed ('10.0.0.152', 6053) (SocketAPIError)
+2025-11-03 11:04:34.469 WARNING (MainThread) [aioesphomeapi.reconnect_logic] Can't connect to ESPHome API for garage-controller @ 10.0.0.129: Error connecting to [AddrInfo(family=<AddressFamily.AF_INET: 2>, type=<SocketKind.SOCK_STREAM: 1>, proto=6, sockaddr=IPv4Sockaddr(address='10.0.0.129', port=6053))]: [Errno 113] Connect call failed ('10.0.0.129', 6053) (SocketAPIError)
+2025-11-03 11:04:34.470 WARNING (MainThread) [aioesphomeapi.reconnect_logic] Can't connect to ESPHome API for garage-sensors @ 10.0.0.119: Error connecting to [AddrInfo(family=<AddressFamily.AF_INET: 2>, type=<SocketKind.SOCK_STREAM: 1>, proto=6, sockaddr=IPv4Sockaddr(address='10.0.0.119', port=6053))]: [Errno 113] Connect call failed ('10.0.0.119', 6053) (SocketAPIError)
+2025-11-03 11:04:40.993 ERROR (MainThread) [homeassistant.config_entries] Error setting up entry ap-000693.88ce29eff22d4385800da1b16d894afa.0643 for tuya
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.13/site-packages/urllib3/connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+        (self._dns_host, self.port),
+    ...<2 lines>...
+        socket_options=self.socket_options,
+    )
+  File "/usr/local/lib/python3.13/site-packages/urllib3/util/connection.py", line 60, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+               ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/socket.py", line 977, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno -3] Try again
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.13/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+        conn,
+    ...<10 lines>...
+        **response_kw,
+    )
+  File "/usr/local/lib/python3.13/site-packages/urllib3/connectionpool.py", line 488, in _make_request
+    raise new_e
+  File "/usr/local/lib/python3.13/site-packages/urllib3/connectionpool.py", line 464, in _make_request
+    self._validate_conn(conn)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/urllib3/connectionpool.py", line 1093, in _validate_conn
+    conn.connect()
+    ~~~~~~~~~~~~^^
+  File "/usr/local/lib/python3.13/site-packages/urllib3/connection.py", line 753, in connect
+    self.sock = sock = self._new_conn()
+                       ~~~~~~~~~~~~~~^^
+  File "/usr/local/lib/python3.13/site-packages/urllib3/connection.py", line 205, in _new_conn
+    raise NameResolutionError(self.host, self, e) from e
+urllib3.exceptions.NameResolutionError: <urllib3.connection.HTTPSConnection object at 0x7f3cfa3f97f0>: Failed to resolve 'apigw.tuyaus.com' ([Errno -3] Try again)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.13/site-packages/requests/adapters.py", line 644, in send
+    resp = conn.urlopen(
+        method=request.method,
+    ...<9 lines>...
+        chunked=chunked,
+    )
+  File "/usr/local/lib/python3.13/site-packages/urllib3/connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+        method, url, error=new_e, _pool=self, _stacktrace=sys.exc_info()[2]
+    )
+  File "/usr/local/lib/python3.13/site-packages/urllib3/util/retry.py", line 519, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='apigw.tuyaus.com', port=443): Max retries exceeded with url: /v1.0/m/life/users/homes (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7f3cfa3f97f0>: Failed to resolve 'apigw.tuyaus.com' ([Errno -3] Try again)"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/src/homeassistant/homeassistant/config_entries.py", line 761, in __async_setup_with_context
+    result = await component.async_setup_entry(hass, self)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/src/homeassistant/homeassistant/components/tuya/__init__.py", line 68, in async_setup_entry
+    await hass.async_add_executor_job(manager.update_device_cache)
+  File "/usr/local/lib/python3.13/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/usr/local/lib/python3.13/site-packages/tuya_sharing/manager.py", line 58, in update_device_cache
+    homes = self.home_repository.query_homes()
+  File "/usr/local/lib/python3.13/site-packages/tuya_sharing/home.py", line 17, in query_homes
+    response = self.api.get(f"/v1.0/m/life/users/homes")
+  File "/usr/local/lib/python3.13/site-packages/tuya_sharing/customerapi.py", line 176, in get
+    return self.__request("GET", path, params, None)
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/tuya_sharing/customerapi.py", line 107, in __request
+    response = self.session.request(
+        method, self.endpoint + path, params=params, json=body, headers=headers
+    )
+  File "/usr/local/lib/python3.13/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/usr/local/lib/python3.13/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/usr/local/lib/python3.13/site-packages/requests/adapters.py", line 677, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='apigw.tuyaus.com', port=443): Max retries exceeded with url: /v1.0/m/life/users/homes (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7f3cfa3f97f0>: Failed to resolve 'apigw.tuyaus.com' ([Errno -3] Try again)"))
+2025-11-03 11:04:48.138 ERROR (MainThread) [metno] Access to https://aa015h6buqvih86i1.api.met.no/weatherapi/locationforecast/2.0/complete returned error 'ClientConnectorDNSError'
+2025-11-03 11:05:03.141 WARNING (MainThread) [homeassistant.core] Something is blocking Home Assistant from wrapping up the start up phase. We're going to continue anyway. Please report the following info at https://github.com/home-assistant/core/issues: backup.sensor, hacs.update, hassio.switch, hardware, file, config, backup.event, homeassistant.scene, stt, energy, auth, energy.sensor, sun, esphome.camera, onboarding, webhook, mobile_app.device_tracker, todo, script, diagnostics, blueprint, repairs, go2rtc, websocket_api, upnp, intent, tag, logbook, sensor, ssdp, tuya, input_button, lovelace, usage_prediction, automation, logger, counter, update, network, input_datetime, google_translate, shopping_list, device_tracker, switch, conversation, persistent_notification, system_log, ffmpeg, search, thread, hassio.binary_sensor, default_config, hassio.update, person, history, input_boolean, api, backup, trace, system_health, dhcp, cloud, radio_browser, my, bluetooth, http, frontend, application_credentials, cloud.tts, scene, binary_sensor, esphome.switch, mobile_app.notify, hacs, mobile_app, met, esphome.button, sun.sensor, tts, timer, shopping_list.todo, stream, image_upload, google_translate.tts, analytics, assist_pipeline, notify, esphome.sensor, mobile_app.binary_sensor, file_upload, homeassistant, recorder, camera, hacs.switch, wake_word, media_source, schedule, hassio, hassio.sensor, input_select, event, device_automation, zone, sun.binary_sensor, usb, input_number, esphome, esphome.update, button, homeassistant_alerts, mobile_app.sensor, input_text, zeroconf The system is waiting for tasks: {<Task pending name='Task-152' coro=<HacsBase.startup_tasks() running at /config/custom_components/hacs/base.py:666> wait_for=<Future pending cb=[shield.<locals>._outer_done_callback() at /usr/local/lib/python3.13/asyncio/tasks.py:975, Task.task_wakeup()]> cb=[set.remove()]>}
+2025-11-03 11:05:20.152 ERROR (MainThread) [metno] Access to https://aa015h6buqvih86i1.api.met.no/weatherapi/locationforecast/2.0/complete returned error 'ClientConnectorDNSError'
+2025-11-03 11:05:20.153 ERROR (MainThread) [homeassistant.components.homeassistant_alerts.coordinator] Error requesting homeassistant_alerts data: Cannot connect to host alerts.home-assistant.io:443 ssl:default [DNS server returned general failure]
+2025-11-03 11:05:22.158 ERROR (MainThread) [custom_components.hacs] Could not update plugin - Error fetching data from HACS: Cannot connect to host data-v2.hacs.xyz:443 ssl:default [DNS server returned general failure]
+2025-11-03 11:05:22.158 ERROR (MainThread) [custom_components.hacs] Could not update integration - Error fetching data from HACS: Cannot connect to host data-v2.hacs.xyz:443 ssl:default [DNS server returned general failure]
+2025-11-03 11:05:22.159 ERROR (MainThread) [custom_components.hacs] Could not update template - Error fetching data from HACS: Cannot connect to host data-v2.hacs.xyz:443 ssl:default [DNS server returned general failure]
+2025-11-03 11:05:22.159 ERROR (MainThread) [custom_components.hacs] Could not update theme - Error fetching data from HACS: Cannot connect to host data-v2.hacs.xyz:443 ssl:default [DNS server returned general failure]
+2025-11-03 11:05:47.639 ERROR (MainThread) [metno] Access to https://aa015h6buqvih86i1.api.met.no/weatherapi/locationforecast/2.0/complete returned error 'ClientConnectorDNSError'
+2025-11-03 11:06:25.127 ERROR (MainThread) [metno] Access to https://aa015h6buqvih86i1.api.met.no/weatherapi/locationforecast/2.0/complete returned error 'ClientConnectorDNSError'
+2025-11-03 11:07:22.308 ERROR (MainThread) [metno] Access to https://aa015h6buqvih86i1.api.met.no/weatherapi/locationforecast/2.0/complete returned error 'ClientConnectorDNSError'
+2025-11-03 11:08:59.648 ERROR (MainThread) [metno] Access to https://aa015h6buqvih86i1.api.met.no/weatherapi/locationforecast/2.0/complete returned error 'ClientConnectorDNSError'
+2025-11-03 11:10:31.152 ERROR (MainThread) [metno] Access to https://aa015h6buqvih86i1.api.met.no/weatherapi/locationforecast/2.0/complete returned error 'ClientConnectorDNSError'
+2025-11-03 11:12:02.464 ERROR (MainThread) [metno] Access to https://aa015h6buqvih86i1.api.met.no/weatherapi/locationforecast/2.0/complete returned error 'ClientConnectorDNSError'
+2025-11-03 11:13:33.867 ERROR (MainThread) [metno] Access to https://aa015h6buqvih86i1.api.met.no/weatherapi/locationforecast/2.0/complete returned error 'ClientConnectorDNSError'
+2025-11-03 11:15:05.176 ERROR (MainThread) [metno] Access to https://aa015h6buqvih86i1.api.met.no/weatherapi/locationforecast/2.0/complete returned error 'ClientConnectorDNSError'
+2025-11-03 11:16:36.459 ERROR (MainThread) [metno] Access to https://aa015h6buqvih86i1.api.met.no/weatherapi/locationforecast/2.0/complete returned error 'ClientConnectorDNSError'
+2025-11-03 11:18:07.625 ERROR (MainThread) [metno] Access to https://aa015h6buqvih86i1.api.met.no/weatherapi/locationforecast/2.0/complete returned error 'ClientConnectorDNSError'
+2025-11-03 11:19:38.706 ERROR (MainThread) [metno] Access to https://aa015h6buqvih86i1.api.met.no/weatherapi/locationforecast/2.0/complete returned error 'ClientConnectorDNSError'
+2025-11-03 11:21:10.091 ERROR (MainThread) [metno] Access to https://aa015h6buqvih86i1.api.met.no/weatherapi/locationforecast/2.0/complete returned error 'ClientConnectorDNSError'
+2025-11-03 11:22:41.239 ERROR (MainThread) [metno] Access to https://aa015h6buqvih86i1.api.met.no/weatherapi/locationforecast/2.0/complete returned error 'ClientConnectorDNSError'
+2025-11-03 11:24:12.642 ERROR (MainThread) [metno] Access to https://aa015h6buqvih86i1.api.met.no/weatherapi/locationforecast/2.0/complete returned error 'ClientConnectorDNSError'
+2025-11-03 11:25:43.835 ERROR (MainThread) [metno] Access to https://aa015h6buqvih86i1.api.met.no/weatherapi/locationforecast/2.0/complete returned error 'ClientConnectorDNSError'
+2025-11-03 11:27:14.968 ERROR (MainThread) [metno] Access to https://aa015h6buqvih86i1.api.met.no/weatherapi/locationforecast/2.0/complete returned error 'ClientConnectorDNSError'
+2025-11-03 11:28:46.305 ERROR (MainThread) [metno] Access to https://aa015h6buqvih86i1.api.met.no/weatherapi/locationforecast/2.0/complete returned error 'ClientConnectorDNSError'
+2025-11-03 11:30:17.663 ERROR (MainThread) [metno] Access to https://aa015h6buqvih86i1.api.met.no/weatherapi/locationforecast/2.0/complete returned error 'ClientConnectorDNSError'
+2025-11-03 11:31:49.030 ERROR (MainThread) [metno] Access to https://aa015h6buqvih86i1.api.met.no/weatherapi/locationforecast/2.0/complete returned error 'ClientConnectorDNSError'
+2025-11-03 11:33:20.300 ERROR (MainThread) [metno] Access to https://aa015h6buqvih86i1.api.met.no/weatherapi/locationforecast/2.0/complete returned error 'ClientConnectorDNSError'
+2025-11-03 11:34:51.488 ERROR (MainThread) [metno] Access to https://aa015h6buqvih86i1.api.met.no/weatherapi/locationforecast/2.0/complete returned error 'ClientConnectorDNSError'
+2025-11-03 11:36:22.635 ERROR (MainThread) [metno] Access to https://aa015h6buqvih86i1.api.met.no/weatherapi/locationforecast/2.0/complete returned error 'ClientConnectorDNSError'
+2025-11-03 11:37:53.945 ERROR (MainThread) [metno] Access to https://aa015h6buqvih86i1.api.met.no/weatherapi/locationforecast/2.0/complete returned error 'ClientConnectorDNSError'
+2025-11-03 11:39:25.204 ERROR (MainThread) [metno] Access to https://aa015h6buqvih86i1.api.met.no/weatherapi/locationforecast/2.0/complete returned error 'ClientConnectorDNSError'
+2025-11-03 11:40:56.433 ERROR (MainThread) [metno] Access to https://aa015h6buqvih86i1.api.met.no/weatherapi/locationforecast/2.0/complete returned error 'ClientConnectorDNSError'
+2025-11-03 11:42:27.820 ERROR (MainThread) [metno] Access to https://aa015h6buqvih86i1.api.met.no/weatherapi/locationforecast/2.0/complete returned error 'ClientConnectorDNSError'
+2025-11-03 11:43:59.145 ERROR (MainThread) [metno] Access to https://aa015h6buqvih86i1.api.met.no/weatherapi/locationforecast/2.0/complete returned error 'ClientConnectorDNSError'
+2025-11-03 11:45:30.397 ERROR (MainThread) [metno] Access to https://aa015h6buqvih86i1.api.met.no/weatherapi/locationforecast/2.0/complete returned error 'ClientConnectorDNSError'
+2025-11-03 11:47:01.498 ERROR (MainThread) [metno] Access to https://aa015h6buqvih86i1.api.met.no/weatherapi/locationforecast/2.0/complete returned error 'ClientConnectorDNSError'
+2025-11-03 11:48:32.815 ERROR (MainThread) [metno] Access to https://aa015h6buqvih86i1.api.met.no/weatherapi/locationforecast/2.0/complete returned error 'ClientConnectorDNSError'
+2025-11-03 11:50:04.106 ERROR (MainThread) [metno] Access to https://aa015h6buqvih86i1.api.met.no/weatherapi/locationforecast/2.0/complete returned error 'ClientConnectorDNSError'
+2025-11-03 11:51:35.585 ERROR (MainThread) [metno] Access to https://aa015h6buqvih86i1.api.met.no/weatherapi/locationforecast/2.0/complete returned error 'ClientConnectorDNSError'
+2025-11-03 11:53:07.022 ERROR (MainThread) [metno] Access to https://aa015h6buqvih86i1.api.met.no/weatherapi/locationforecast/2.0/complete returned error 'ClientConnectorDNSError'
+2025-11-03 11:54:38.456 ERROR (MainThread) [metno] Access to https://aa015h6buqvih86i1.api.met.no/weatherapi/locationforecast/2.0/complete returned error 'ClientConnectorDNSError'
+2025-11-03 11:56:09.523 ERROR (MainThread) [metno] Access to https://aa015h6buqvih86i1.api.met.no/weatherapi/locationforecast/2.0/complete returned error 'ClientConnectorDNSError'
+2025-11-03 11:57:40.942 ERROR (MainThread) [metno] Access to https://aa015h6buqvih86i1.api.met.no/weatherapi/locationforecast/2.0/complete returned error 'ClientConnectorDNSError'
+2025-11-03 11:59:12.051 ERROR (MainThread) [metno] Access to https://aa015h6buqvih86i1.api.met.no/weatherapi/locationforecast/2.0/complete returned error 'ClientConnectorDNSError'
+2025-11-03 12:00:43.362 ERROR (MainThread) [metno] Access to https://aa015h6buqvih86i1.api.met.no/weatherapi/locationforecast/2.0/complete returned error 'ClientConnectorDNSError'
+2025-11-03 12:02:14.733 ERROR (MainThread) [metno] Access to https://aa015h6buqvih86i1.api.met.no/weatherapi/locationforecast/2.0/complete returned error 'ClientConnectorDNSError'
+2025-11-03 12:03:46.178 ERROR (MainThread) [metno] Access to https://aa015h6buqvih86i1.api.met.no/weatherapi/locationforecast/2.0/complete returned error 'ClientConnectorDNSError'
+2025-11-03 12:05:17.274 ERROR (MainThread) [metno] Access to https://aa015h6buqvih86i1.api.met.no/weatherapi/locationforecast/2.0/complete returned error 'ClientConnectorDNSError'
+2025-11-03 12:06:48.363 ERROR (MainThread) [metno] Access to https://aa015h6buqvih86i1.api.met.no/weatherapi/locationforecast/2.0/complete returned error 'ClientConnectorDNSError'
+2025-11-03 12:08:19.798 ERROR (MainThread) [metno] Access to https://aa015h6buqvih86i1.api.met.no/weatherapi/locationforecast/2.0/complete returned error 'ClientConnectorDNSError'
+2025-11-03 12:09:51.141 ERROR (MainThread) [metno] Access to https://aa015h6buqvih86i1.api.met.no/weatherapi/locationforecast/2.0/complete returned error 'ClientConnectorDNSError'
+2025-11-03 12:18:02.917 WARNING (MainThread) [aioesphomeapi.reconnect_logic] Can't connect to ESPHome API for esphome-web-055c68 @ 10.0.0.124: Error connecting to [AddrInfo(family=<AddressFamily.AF_INET: 2>, type=<SocketKind.SOCK_STREAM: 1>, proto=6, sockaddr=IPv4Sockaddr(address='10.0.0.124', port=6053))]: [Errno 113] Connect call failed ('10.0.0.124', 6053) (SocketAPIError)
+2025-11-03 12:19:29.595 WARNING (MainThread) [aioesphomeapi.connection] 10.0.10.173: Connection error occurred: Timeout while connecting to [AddrInfo(family=<AddressFamily.AF_INET: 2>, type=<SocketKind.SOCK_STREAM: 1>, proto=6, sockaddr=IPv4Sockaddr(address='10.0.10.173', port=6053))]
+2025-11-03 12:22:39.589 WARNING (MainThread) [async_upnp_client.profiles.profile] Failed (re-)subscribing to: uuid:subscription-1c5ccf18-7225-49d5-8ef7-4a26a46c43af, reason: UpnpConnectionError('ClientConnectorError(ConnectionKey(host=\'10.0.0.1\', port=1900, is_ssl=False, ssl=True, proxy=None, proxy_auth=None, proxy_headers_hash=None), OSError(113, "Connect call failed (\'10.0.0.1\', 1900)"))', None)
+2025-11-03 12:22:48.805 WARNING (MainThread) [async_upnp_client.profiles.profile] Failed (re-)subscribing to: uuid:subscription-97bacdab-fb69-4551-a9d2-532bcbf74af6, reason: UpnpConnectionError('ClientConnectorError(ConnectionKey(host=\'10.0.0.1\', port=1900, is_ssl=False, ssl=True, proxy=None, proxy_auth=None, proxy_headers_hash=None), OSError(113, "Connect call failed (\'10.0.0.1\', 1900)"))', None)
+2025-11-03 12:22:58.021 WARNING (MainThread) [async_upnp_client.profiles.profile] Failed (re-)subscribing to: uuid:subscription-46f985cd-a007-4759-922b-269b99a416de, reason: UpnpConnectionError('ClientConnectorError(ConnectionKey(host=\'10.0.0.1\', port=1900, is_ssl=False, ssl=True, proxy=None, proxy_auth=None, proxy_headers_hash=None), OSError(113, "Connect call failed (\'10.0.0.1\', 1900)"))', None)
+2025-11-03 12:32:34.189 WARNING (MainThread) [aioesphomeapi.connection] 10.0.10.173: Connection error occurred: Timeout while connecting to [AddrInfo(family=<AddressFamily.AF_INET: 2>, type=<SocketKind.SOCK_STREAM: 1>, proto=6, sockaddr=IPv4Sockaddr(address='10.0.10.173', port=6053))]
+2025-11-03 12:33:34.193 WARNING (MainThread) [aioesphomeapi.reconnect_logic] Can't connect to ESPHome API for esphome-web-055c68 @ 10.0.10.173: Timeout while connecting to [AddrInfo(family=<AddressFamily.AF_INET: 2>, type=<SocketKind.SOCK_STREAM: 1>, proto=6, sockaddr=IPv4Sockaddr(address='10.0.10.173', port=6053))] (TimeoutAPIError)
+2025-11-03 13:11:14.790 ERROR (MainThread) [metno] Access to https://aa015h6buqvih86i1.api.met.no/weatherapi/locationforecast/2.0/complete returned error 'ClientConnectorDNSError'
+2025-11-03 13:11:14.790 ERROR (MainThread) [homeassistant.components.met.coordinator] Error fetching met data: Update failed: 
+2025-11-03 14:11:17.742 ERROR (MainThread) [metno] Access to https://aa015h6buqvih86i1.api.met.no/weatherapi/locationforecast/2.0/complete returned error 'ClientConnectorDNSError'
+2025-11-03 15:07:26.580 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 15:07:26.583 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 15:07:32.453 WARNING (MainThread) [zeroconf] Error with socket 16 (('10.0.0.116', 5353))): [Errno 101] Network unreachable
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.13/asyncio/selector_events.py", line 1269, in sendto
+    self._sock.sendto(data, addr)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+OSError: [Errno 101] Network unreachable
+2025-11-03 15:09:22.264 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-03 15:11:58.595 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 15:11:58.651 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 15:11:58.683 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 15:11:59.084 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 15:11:59.094 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 15:16:59.566 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 15:16:59.620 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 15:16:59.627 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 15:17:00.008 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 15:17:00.020 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 15:19:22.266 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-03 15:22:00.391 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 15:22:00.392 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 15:22:00.449 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 15:22:00.725 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 15:22:00.735 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 15:27:00.392 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 15:27:00.395 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 15:27:00.398 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 15:27:00.719 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 15:27:00.720 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 15:29:22.268 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-03 15:32:01.345 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 15:32:01.353 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 15:32:01.362 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 15:32:01.558 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 15:32:01.568 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 15:37:01.382 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 15:37:01.403 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 15:37:01.408 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 15:37:01.680 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 15:37:01.691 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 15:39:22.270 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-03 15:42:02.392 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 15:42:02.403 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 15:42:02.404 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 15:42:02.739 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 15:42:02.751 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 15:47:02.370 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 15:47:02.404 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 15:47:02.411 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 15:47:02.686 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 15:47:02.697 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 15:49:22.271 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-03 15:52:02.449 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 15:52:02.552 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 15:52:02.595 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 15:52:02.896 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 15:52:02.908 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 15:57:03.475 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 15:57:03.507 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 15:57:03.923 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 15:57:03.933 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 15:57:09.227 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 15:57:15.398 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 15:57:15.408 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 15:57:15.410 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 15:57:15.812 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 15:57:15.814 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 15:57:24.693 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 15:57:58.358 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 15:57:58.360 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 15:57:58.368 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 15:57:58.432 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 15:57:58.703 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 15:57:58.704 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 15:59:22.274 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-03 16:06:22.207 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 16:06:22.208 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 16:06:22.210 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 16:06:22.242 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 16:06:22.332 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 16:06:22.517 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 16:06:22.518 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 16:07:44.288 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 16:07:44.289 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 16:07:44.312 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 16:07:44.337 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 16:07:59.610 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 16:08:14.943 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 16:08:34.788 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 16:08:34.791 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 16:08:34.959 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 16:09:22.274 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-03 16:19:22.275 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-03 16:29:22.276 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-03 16:39:22.277 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-03 16:49:22.278 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-03 16:59:22.280 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-03 17:09:22.281 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-03 17:19:22.283 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-03 17:29:22.283 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-03 17:39:22.285 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-03 17:49:22.286 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-03 17:59:22.288 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-03 18:09:22.289 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-03 18:19:22.289 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-03 18:29:22.291 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-03 18:39:22.291 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-03 18:49:22.293 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-03 18:59:22.295 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-03 19:09:22.296 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-03 19:19:22.297 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-03 19:29:22.298 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-03 19:39:22.300 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-03 19:49:22.301 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-03 19:59:22.303 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-03 20:05:20.701 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-03 20:09:22.304 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-03 20:19:22.307 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-03 20:29:22.307 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-03 20:39:22.309 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-03 20:49:22.310 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-03 20:59:22.311 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-03 21:09:22.311 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-03 21:19:22.312 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-03 21:29:22.314 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-03 21:39:22.315 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-03 21:49:22.316 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-03 21:59:22.317 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-03 22:09:22.318 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-03 22:19:22.320 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-03 22:29:22.321 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-03 22:39:22.322 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-03 22:49:22.322 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-03 22:59:22.323 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-03 23:09:22.324 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-03 23:19:22.325 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-03 23:29:22.326 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-03 23:39:22.327 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-03 23:49:22.330 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-03 23:59:22.331 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 00:09:22.332 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 00:19:22.332 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 00:29:22.333 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 00:39:22.334 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 00:49:22.335 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 00:59:22.336 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 01:09:22.337 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 01:19:22.337 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 01:29:22.339 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 01:39:22.342 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 01:49:22.343 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 01:59:22.345 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 02:09:22.346 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 02:19:22.347 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 02:29:22.348 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 02:39:22.349 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 02:49:22.351 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 02:59:22.353 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 03:09:22.354 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 03:19:22.356 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 03:29:22.357 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 03:39:22.358 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 03:49:22.361 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 03:59:22.362 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 04:09:22.364 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 04:19:22.367 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 04:29:22.368 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 04:39:22.370 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 04:49:22.372 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 04:59:22.373 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 05:09:22.374 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 05:19:22.375 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 05:29:22.376 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 05:39:22.377 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 05:49:22.379 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 05:59:22.382 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 06:09:22.384 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 06:19:22.386 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 06:29:22.389 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 06:35:14.531 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 06:35:14.660 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 06:35:14.660 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 06:35:14.667 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 06:35:14.667 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 06:35:14.789 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 06:35:17.202 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 06:35:17.431 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 06:35:20.064 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 06:35:30.294 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 06:35:40.524 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 06:36:26.465 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 06:36:26.465 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 06:36:26.790 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 06:36:27.217 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 06:36:27.955 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 06:36:28.011 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 06:36:28.182 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 06:36:28.225 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 06:38:25.076 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 06:39:22.390 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 06:39:38.962 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 06:39:38.980 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 06:39:38.982 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 06:39:38.988 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 06:39:39.106 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 06:39:39.269 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 06:39:39.270 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 06:40:13.346 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 06:40:13.419 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 06:40:13.420 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 06:40:28.911 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 06:40:41.186 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 06:40:44.281 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 06:40:49.368 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 06:40:49.432 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 06:40:49.643 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 06:40:49.644 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 06:45:14.484 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 06:45:14.512 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 06:45:14.613 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 06:45:29.872 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 06:45:37.716 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 06:45:47.563 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 06:49:22.393 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 06:50:15.464 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 06:50:15.499 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 06:50:15.608 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 06:50:30.913 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 06:50:34.916 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 06:50:34.935 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 06:55:16.369 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 06:55:16.382 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 06:55:16.471 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 06:55:31.722 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 06:55:47.086 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 06:56:22.100 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 06:56:22.119 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 06:56:22.396 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 06:59:22.394 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 07:00:17.373 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:00:17.423 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:00:17.500 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:00:32.740 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:00:48.074 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:02:35.394 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:02:35.394 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:02:35.716 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:05:17.378 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:05:17.403 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:05:17.493 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:05:17.677 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:05:17.696 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:09:22.395 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 07:10:17.361 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:10:17.383 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:10:17.479 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:10:32.680 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:10:48.066 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:15:18.379 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:15:18.392 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:15:18.475 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:15:33.730 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:15:49.129 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:16:42.158 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:16:42.174 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:16:42.647 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:19:22.397 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 07:20:20.116 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:20:20.459 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:20:20.948 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:20:23.062 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:20:27.373 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:20:43.189 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:20:54.611 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:22:44.009 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:22:44.010 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:22:44.293 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:25:19.471 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:25:19.582 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:25:19.679 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:25:35.373 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:25:50.911 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:29:22.399 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 07:30:20.586 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:30:20.706 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:30:20.713 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:30:36.199 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:30:51.999 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:35:20.653 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:35:20.773 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:35:21.038 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:35:36.576 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:35:52.092 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:39:22.400 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 07:40:20.572 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:40:20.614 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:40:20.756 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:40:36.400 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:40:52.183 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:49:22.401 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 07:52:37.716 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:52:37.951 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:52:37.954 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:52:53.160 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:53:08.531 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:57:17.471 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:57:17.482 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:57:17.802 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:57:37.368 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:57:37.470 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:57:37.617 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:57:37.618 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:59:22.403 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 07:59:43.488 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:59:43.493 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:59:43.508 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:59:43.632 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 07:59:58.781 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 08:00:14.077 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 08:00:19.426 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 08:00:19.492 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 08:00:19.692 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 08:00:19.697 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 08:02:38.597 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 08:02:38.641 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 08:02:38.734 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 08:02:38.910 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 08:02:38.926 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 08:03:10.304 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 08:03:10.305 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 08:03:10.320 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 08:03:10.326 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 08:03:13.235 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 08:03:13.239 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 08:07:16.606 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 08:07:16.609 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 08:07:16.609 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 08:07:16.620 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 08:07:16.780 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 08:07:31.969 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 08:07:47.420 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 08:08:26.584 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 08:08:26.588 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 08:08:26.825 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 08:08:27.180 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 08:08:42.532 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 08:08:58.110 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 08:09:02.532 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 08:09:02.620 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 08:09:11.417 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 08:09:19.351 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 08:09:19.764 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 08:09:22.405 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 08:09:24.306 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 08:09:24.766 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 08:10:02.484 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 08:19:22.406 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 08:29:22.407 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 08:39:22.408 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 08:48:25.696 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 08:49:22.409 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 08:59:22.410 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 09:09:22.412 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 09:19:22.414 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 09:29:22.416 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 09:39:22.416 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 09:49:22.418 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 09:55:01.980 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 09:55:02.031 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 09:55:02.048 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 09:55:02.049 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 09:59:22.420 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 10:09:22.422 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 10:19:22.423 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 10:29:22.426 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 10:39:22.427 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 10:49:22.429 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 10:59:22.430 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 11:09:22.432 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 11:19:22.433 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 11:29:22.434 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 11:39:22.437 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 11:49:22.438 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 11:59:22.441 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 12:09:22.443 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 12:19:22.444 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 12:29:22.445 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 12:31:55.112 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 12:39:22.446 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 12:46:35.577 ERROR (MainThread) [homeassistant.components.homeassistant_alerts.coordinator] Error requesting homeassistant_alerts data: Cannot connect to host alerts.home-assistant.io:443 ssl:default [Timeout while contacting DNS servers]
+2025-11-04 12:49:22.448 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 12:59:22.449 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 13:09:22.449 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 13:19:22.451 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 13:29:22.453 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 13:39:22.454 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 13:49:22.455 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 13:59:22.457 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 14:09:22.460 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 14:19:22.462 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 14:29:22.462 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 14:38:01.931 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 14:38:01.932 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 14:38:01.938 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 14:38:01.942 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 14:38:01.942 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 14:38:01.947 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 14:38:01.948 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 14:38:02.074 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 14:38:02.184 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 14:38:07.481 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 14:38:17.753 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 14:38:23.278 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 14:38:23.279 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 14:38:54.278 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 14:38:54.282 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 14:38:54.297 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 14:38:54.386 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 14:38:54.603 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 14:38:54.604 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 14:39:15.346 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 14:39:22.464 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 14:40:34.288 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 14:40:34.289 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 14:40:34.290 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 14:40:34.338 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 14:40:34.523 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 14:40:34.524 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 14:41:40.354 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 14:41:40.355 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 14:41:40.358 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 14:41:40.372 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 14:41:55.676 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 14:42:11.233 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 14:42:37.007 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 14:42:37.009 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 14:42:37.312 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 14:44:15.316 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 14:44:15.331 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 14:44:15.345 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 14:44:15.561 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 14:44:15.571 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 14:49:16.452 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 14:49:16.494 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 14:49:16.508 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 14:49:22.465 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 14:49:28.507 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 14:49:44.026 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 14:49:51.785 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 14:49:51.800 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 14:59:22.466 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 15:02:31.420 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:02:31.420 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:02:31.496 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:02:31.551 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:02:46.834 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:03:02.225 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:06:22.924 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:06:22.953 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:06:38.345 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:07:49.605 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:07:49.752 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:07:50.599 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:07:53.130 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:08:11.806 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:08:27.327 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:09:22.468 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 15:12:49.353 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:12:49.385 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:12:49.410 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:13:04.725 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:13:20.007 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:16:36.532 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:16:36.535 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:16:36.896 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:17:50.313 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:17:50.368 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:17:50.418 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:18:05.608 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:18:21.002 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:19:22.469 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 15:21:57.733 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:21:57.734 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:21:58.056 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:22:50.372 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:22:50.405 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:22:50.419 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:23:05.767 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:23:21.110 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:26:12.656 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:26:12.657 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:26:13.026 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:27:51.380 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:27:51.395 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:27:51.428 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:27:51.696 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:27:51.707 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:29:22.470 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 15:32:51.323 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:32:51.348 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:32:51.383 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:32:51.531 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:32:51.542 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:37:51.365 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:37:51.384 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:37:51.414 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:37:51.655 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:37:51.664 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:39:22.471 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 15:42:52.365 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:42:52.377 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:42:52.389 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:42:52.628 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:42:52.638 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:47:53.454 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:47:53.503 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:47:53.542 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:48:08.907 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:48:23.989 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:49:22.472 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 15:50:12.194 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:50:12.195 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:50:12.604 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:52:54.621 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:52:54.673 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:52:55.058 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:52:55.072 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:53:59.390 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:53:59.401 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:53:59.403 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:53:59.508 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:54:14.886 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:54:27.992 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:54:34.182 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:54:34.500 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:54:34.571 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:54:34.718 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:54:34.722 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:54:34.878 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:54:34.939 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:54:34.940 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:54:35.033 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:58:27.856 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:58:27.859 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:58:27.861 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:58:27.925 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:58:28.429 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:58:28.430 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:58:28.727 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:58:28.897 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:58:29.034 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:58:29.036 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:59:22.473 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 15:59:23.317 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:59:23.318 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:59:23.327 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:59:23.363 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:59:23.585 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 15:59:23.586 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 16:09:22.476 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 16:19:22.477 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 16:29:22.478 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 16:39:22.479 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 16:49:22.481 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 16:59:22.482 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 17:09:22.482 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 17:16:10.643 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 17:16:10.644 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 17:16:10.679 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 17:19:22.483 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 17:29:22.484 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 17:39:22.484 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 17:40:53.753 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 17:40:53.755 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 17:41:01.821 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 17:41:31.838 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 17:41:31.839 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 17:41:45.260 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 17:41:45.261 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 17:41:45.270 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 17:41:45.538 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 17:41:45.539 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 17:41:47.275 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 17:49:22.487 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 17:59:22.488 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 18:09:22.489 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 18:19:22.491 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 18:29:22.493 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 18:39:22.494 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 18:43:52.828 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 18:49:22.495 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 18:53:22.666 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 18:53:22.735 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 18:53:22.736 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 18:53:22.737 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 18:53:22.737 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 18:53:22.737 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 18:53:22.746 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 18:53:22.916 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 18:53:22.923 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 18:53:23.019 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 18:53:23.021 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 18:53:28.232 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 18:54:31.354 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 18:54:31.356 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 18:54:31.358 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 18:54:31.453 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 18:54:41.692 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 18:54:57.043 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 18:54:58.883 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 18:54:59.741 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 18:55:04.483 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 18:59:22.496 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 19:09:22.496 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 19:19:22.498 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 19:29:22.501 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 19:39:22.502 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 19:40:20.539 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 19:40:20.540 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 19:40:22.714 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 19:49:22.503 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 19:59:22.506 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 20:09:22.507 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 20:19:22.509 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 20:29:22.511 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 20:39:22.513 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 20:49:22.514 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 20:59:22.516 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 21:09:22.518 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 21:19:22.519 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 21:29:22.519 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 21:39:22.520 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 21:49:22.521 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 21:59:22.521 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 22:09:22.521 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 22:19:22.523 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 22:29:22.524 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 22:39:22.526 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 22:49:22.527 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 22:59:22.529 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 23:05:54.464 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 23:05:54.600 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 23:05:54.737 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 23:05:54.866 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-04 23:09:22.530 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 23:19:22.531 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 23:29:22.533 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 23:39:22.533 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 23:49:22.535 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-04 23:59:22.536 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-05 00:04:20.251 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-05 00:09:22.537 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-05 00:19:22.538 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-05 00:29:22.539 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-05 00:39:22.540 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-05 00:49:22.541 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-05 00:59:22.543 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-05 01:09:22.544 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-05 01:19:22.545 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-05 01:29:22.546 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-05 01:39:22.546 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-05 01:49:22.548 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-05 01:59:22.549 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-05 02:09:22.551 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-05 02:19:22.552 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-05 02:29:22.553 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-05 02:39:22.553 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-05 02:49:22.554 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-05 02:59:22.556 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-05 03:09:22.557 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-05 03:19:22.560 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-05 03:29:22.562 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-05 03:39:22.562 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-05 03:49:22.564 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-05 03:59:22.566 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-05 04:09:22.568 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-05 04:18:15.813 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-05 04:19:22.570 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-05 04:29:22.571 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-05 04:39:22.572 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-05 04:49:22.574 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-05 04:59:22.577 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-05 05:09:22.578 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-05 05:19:22.579 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-05 05:29:22.581 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-05 05:39:22.583 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-05 05:49:22.584 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-05 05:59:22.586 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-05 06:09:22.586 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-05 06:19:22.588 ERROR (MainThread) [async_upnp_client.ssdp] Received error: [Errno 101] Network unreachable, transport: <_SelectorDatagramTransport fd=38 read=polling write=<idle, bufsize=0>>, socket: <asyncio.TransportSocket fd=38, family=2, type=2, proto=0, laddr=('0.0.0.0', 36678)>
+2025-11-05 06:21:14.524 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194
+2025-11-05 06:21:14.589 ERROR (MainThread) [homeassistant.components.http.forwarded] Received X-Forwarded-For header from an untrusted proxy 10.0.10.194

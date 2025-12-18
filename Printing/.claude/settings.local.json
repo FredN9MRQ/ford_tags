@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python generate_nameplates.py:*)",
+      "Bash(git add:*)",
+      "Bash(git init:*)",
+      "Bash(git remote add:*)",
+      "Bash(git fetch:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(git ls-remote:*)",
+      "Bash(done)",
+      "Bash(git pull:*)",
+      "Bash(python:*)",
+      "Bash(\"C:\\Program Files\\OpenSCAD\\openscad.exe\" -D 'name=\"\"Fred\"\"' -o \"TEST_Fred_raised_text.stl\" \"zipper_pull_raised_text_template.scad\")",
+      "Bash(ls:*)",
+      "Bash(head:*)",
+      "Bash(\"C:\\Program Files\\OpenSCAD\\openscad.exe\" \"zipper-pulls-raised-text/Ford-Fred (2).stl\" --export-format echo --o -)",
+      "Bash(\"C:\\Program Files\\OpenSCAD\\openscad.exe\" \"zipper-pulls-raised-text/111.stl\" --export-format echo --o -)",
+      "Bash(dir \"C:\\Users\\Fred\\.claude-worktrees\\Printing\\eager-bose\\Nameplates\\zipper-pulls-raised-text\" /T:W)",
+      "Bash(findstr:*)",
+      "Bash(powershell:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

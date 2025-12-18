@@ -1,0 +1,125 @@
+# Loads default set of integrations. Do not remove.
+default_config:
+
+# Load frontend themes from the themes folder
+frontend:
+  themes: !include_dir_merge_named themes
+
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+
+http:
+  use_x_forwarded_for: true
+  trusted_proxies:
+    - 127.0.0.1
+
+homeassistant:
+  allowlist_external_urls:
+    - "https://bob.nianticbooks.com"
+
+# ============================================
+# Voice Assistant Configuration
+# Gaming PC IP: 10.0.10.92
+# ============================================
+
+# REQUIRED: Wyoming Protocol Integration
+wyoming:
+  # Whisper STT (Speech-to-Text)
+  - host: 10.0.10.92
+    port: 10300
+    protocol: tcp
+    name: "Whisper STT"
+
+  # Piper TTS (Text-to-Speech)
+  - host: 10.0.10.92
+    port: 10200
+    protocol: tcp
+    name: "Piper TTS"
+
+  # OpenWakeWord (Wake Word Detection)
+  - host: 10.0.10.92
+    port: 10400
+    protocol: tcp
+    name: "OpenWakeWord"
+
+# REQUIRED: Ollama LLM Integration
+conversation:
+  - platform: ollama
+    name: "Local LLM"
+    model: "llama3.1:8b"
+    url: "http://10.0.10.92:11434"
+    max_tokens: 500
+    temperature: 0.7
+    prompt: |
+      You are a helpful voice assistant integrated with Home Assistant.
+      You help with calendar management, weather updates, task tracking, and home control.
+      Keep responses concise and natural for voice output.
+      Current time: {{ now().strftime('%I:%M %p') }}
+      Current date: {{ now().strftime('%A, %B %d, %Y') }}
+
+# REQUIRED: Assist Pipeline Configuration
+assist_pipeline:
+  pipelines:
+    # Basic pipeline using built-in Home Assistant conversation
+    - name: "Local Voice Assistant"
+      language: "en"
+      conversation_agent: "conversation.home_assistant"
+      stt_engine: "stt.whisper_stt"
+      tts_engine: "tts.piper_tts"
+      wake_word_entity: "wake_word.openwakeword"
+
+    # Advanced pipeline using Ollama LLM
+    - name: "Local LLM Assistant"
+      language: "en"
+      conversation_agent: "conversation.local_llm"
+      stt_engine: "stt.whisper_stt"
+      tts_engine: "tts.piper_tts"
+      wake_word_entity: "wake_word.openwakeword"
+
+# OPTIONAL: Weather Integration (Free)
+weather:
+  - platform: met
+    name: "Local Weather"
+
+# OPTIONAL: Todo/Task Lists
+todo:
+  - platform: local_todo
+    name: "Personal Tasks"
+  - platform: local_todo
+    name: "Work Projects"
+  - platform: local_todo
+    name: "Shopping List"
+
+# OPTIONAL: Voice Command Intent Scripts
+intent_script:
+  GetWeather:
+    speech:
+      text: >
+        The current temperature is {{ state_attr('weather.local_weather', 'temperature') }} degrees.
+        Currently {{ states('weather.local_weather') | replace('_', ' ') | title }}.
+    action:
+      - service: logbook.log
+        data:
+          name: "Weather Query"
+          message: "User asked about weather"
+
+  GetTime:
+    speech:
+      text: >
+        The current time is {{ now().strftime('%I:%M %p') }}.
+    action:
+      - service: logbook.log
+        data:
+          name: "Time Query"
+          message: "User asked about time"
+
+  GetDate:
+    speech:
+      text: >
+        Today is {{ now().strftime('%A, %B %d, %Y') }}.
+    action:
+      - service: logbook.log
+        data:
+          name: "Date Query"
+          message: "User asked about date"

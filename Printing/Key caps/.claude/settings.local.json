@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(where:*)",
+      "Bash(if exist \"C:\\Program Files\\OpenSCAD\\openscad.exe\" echo Found at C:Program FilesOpenSCADopenscad.exe)",
+      "Bash(\"/c/Program Files/OpenSCAD/openscad.exe\" -o \"Body5_scaled_98percent.stl\" \"Body5_scaled.scad\")",
+      "Bash(\"/c/Program Files/OpenSCAD/openscad.exe\" --clear-cache -o \"Body5_scaled_98percent.stl\" \"Body5_scaled.scad\")",
+      "Bash(\"/c/Program Files/OpenSCAD/openscad.exe\" -o \"Body5_TEST_circle.stl\" \"Body5_test_circle.scad\")",
+      "Bash(\"/c/Program Files/OpenSCAD/openscad.exe\" -o \"test_cylinder.stl\" \"test_cylinder.scad\")",
+      "Bash(\"/c/Program Files/OpenSCAD/openscad.exe\" -o \"Body5_scaled_FIXED_98percent.stl\" \"Body5_scaled_FIXED.scad\")",
+      "Bash(\"/c/Program Files/OpenSCAD/openscad.exe\" --clear-cache -o \"Body5(1)_scaled_98percent.stl\" \"Body5(1)_scaled.scad\")",
+      "Bash(\"/c/Program Files/OpenSCAD/openscad.exe\" -o \"Body5(1)_scaled_98percent.stl\" \"Body5(1)_scaled.scad\")",
+      "Bash(ls:*)",
+      "Bash(\"/c/Program Files/OpenSCAD/openscad.exe\" -D number_to_generate=1 -o \"Body5_num1.stl\" \"generate_numbered_keycaps.scad\")",
+      "Bash(cmd /c generate_all_numbered_keycaps.bat)",
+      "Bash(for i in {2..20})",
+      "Bash(do \"/c/Program Files/OpenSCAD/openscad.exe\" -D number_to_generate=$i -o \"Body5_num$i.stl\" \"generate_numbered_keycaps.scad\")",
+      "Bash(done)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

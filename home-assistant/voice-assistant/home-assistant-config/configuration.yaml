@@ -1,0 +1,167 @@
+# Voice Assistant Configuration for Home Assistant
+# Add this to your existing configuration.yaml
+
+# Wyoming Protocol Integration (for voice services)
+# Replace GAMING_PC_IP with your gaming PC's IP address
+wyoming:
+
+# Whisper STT
+  - host: GAMING_PC_IP
+    port: 10300
+    protocol: tcp
+    name: "Whisper STT"
+
+# Piper TTS
+  - host: GAMING_PC_IP
+    port: 10200
+    protocol: tcp
+    name: "Piper TTS"
+
+# OpenWakeWord
+  - host: GAMING_PC_IP
+    port: 10400
+    protocol: tcp
+    name: "OpenWakeWord"
+
+# Assist Pipeline Configuration
+assist_pipeline:
+  pipelines:
+    - name: "Local Voice Assistant"
+      language: "en"
+      conversation_agent: "conversation.home_assistant"
+      stt_engine: "stt.faster_whisper"
+      tts_engine: "tts.piper"
+      wake_word_entity: "wake_word.openwakeword"
+
+    - name: "Local LLM Assistant"
+      language: "en"
+      conversation_agent: "conversation.local_llm"
+      stt_engine: "stt.faster_whisper"
+      tts_engine: "tts.piper"
+      wake_word_entity: "wake_word.openwakeword"
+
+# Ollama Integration for Local LLM
+conversation:
+  - platform: "ollama"
+    name: "Local LLM"
+    model: "llama3.1:8b"  # or phi3:mini for faster responses
+    url: "http://GAMING_PC_IP:11434"
+    max_tokens: 500
+    temperature: 0.7
+    prompt: |
+      You are a helpful voice assistant integrated with Home Assistant.
+      You help with calendar management, weather updates, task tracking, and home control.
+      Keep responses concise and natural for voice output.
+      Current time: {{ now().strftime('%I:%M %p') }}
+      Current date: {{ now().strftime('%A, %B %d, %Y') }}
+
+# Google Calendar Integration
+google:
+  client_id: !secret google_client_id
+  client_secret: !secret google_client_secret
+
+# CalDAV Integration (for Apple Calendar)
+caldav:
+  - url: https://caldav.icloud.com
+    username: !secret icloud_email
+    password: !secret icloud_app_password
+    calendars:
+      - "Personal"
+      - "Work"
+
+# Weather Integration (Met.no - Free, no API key required)
+weather:
+  - platform: met
+    name: "Local Weather"
+
+# Alternative Weather (OpenWeatherMap - requires free API key)
+# weather:
+#   - platform: openweathermap
+#     api_key: !secret openweathermap_api_key
+#     name: "Local Weather"
+
+# Todo/Task Lists
+todo:
+  - platform: local_todo
+    name: "Personal Tasks"
+  - platform: local_todo
+    name: "Work Projects"
+  - platform: local_todo
+    name: "Shopping List"
+
+# Sensors for Voice Assistant
+sensor:
+  # Calendar event sensors
+  - platform: template
+    sensors:
+      next_calendar_event:
+        friendly_name: "Next Calendar Event"
+        value_template: >
+          {% set events = state_attr('calendar.your_calendar', 'message') %}
+          {{ events if events else 'No upcoming events' }}
+
+      next_event_time:
+        friendly_name: "Next Event Time"
+        value_template: >
+          {% set start = state_attr('calendar.your_calendar', 'start_time') %}
+          {{ start if start else 'N/A' }}
+
+  # Task counter
+  - platform: template
+    sensors:
+      pending_tasks:
+        friendly_name: "Pending Tasks"
+        value_template: >
+          {{ states.todo | selectattr('state', 'eq', 'on') | list | count }}
+
+# Intent Scripts for Voice Commands
+intent_script:
+  WhatsOnCalendar:
+    speech:
+      text: >
+        {% set events = state_attr('calendar.your_calendar', 'all_events') %}
+        {% if events %}
+          You have {{ events | count }} events today.
+          Your next event is {{ events[0].summary }} at {{ events[0].start | as_timestamp | timestamp_custom('%I:%M %p') }}.
+        {% else %}
+          You have no events scheduled for today.
+        {% endif %}
+    action:
+      - service: logbook.log
+        data:
+          name: "Calendar Query"
+          message: "User asked about calendar events"
+
+  GetWeather:
+    speech:
+      text: >
+        The current temperature is {{ state_attr('weather.local_weather', 'temperature') }} degrees.
+        {{ states('weather.local_weather') | replace('_', ' ') | title }}.
+    action:
+      - service: logbook.log
+        data:
+          name: "Weather Query"
+          message: "User asked about weather"
+
+  GetTasks:
+    speech:
+      text: >
+        {% set tasks = states.todo | selectattr('state', 'eq', 'on') | list %}
+        {% if tasks | count == 0 %}
+          You have no pending tasks.
+        {% elif tasks | count == 1 %}
+          You have 1 pending task.
+        {% else %}
+          You have {{ tasks | count }} pending tasks.
+        {% endif %}
+    action:
+      - service: logbook.log
+        data:
+          name: "Task Query"
+          message: "User asked about tasks"
+
+# Automation placeholder (see automations.yaml)
+automation: !include automations.yaml
+
+# Scripts for complex actions
+script: !include scripts.yaml

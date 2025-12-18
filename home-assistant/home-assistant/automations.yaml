@@ -1,0 +1,212 @@
+# ============================================
+# PRESENCE-BASED AUTOMATIONS
+# ============================================
+
+- id: '1761630123161'
+  alias: Fred leaves house
+  description: 'Turn off office light when leaving home'
+  triggers:
+  - device_id: 19bd87e4ffcdcdd4d4af6638c33b54c3
+    domain: device_tracker
+    entity_id: 9af13ab3b83ea2d7a0c45b12f383db2e
+    type: leaves
+    trigger: device
+    id: Watch leave house
+    zone: zone.home
+  conditions: []
+  actions:
+  - action: light.turn_off
+    metadata: {}
+    data: {}
+    target:
+      device_id: 70bf5de442dd94e5e56f4ef5d5fbddb5
+      entity_id: light.fred_office_light
+  mode: single
+
+- id: 'fred_arrives_home'
+  alias: Fred arrives home
+  description: 'Welcome home actions when Fred arrives'
+  triggers:
+  - device_id: 19bd87e4ffcdcdd4d4af6638c33b54c3
+    domain: device_tracker
+    entity_id: 9af13ab3b83ea2d7a0c45b12f383db2e
+    type: enters
+    trigger: device
+    zone: zone.home
+  conditions:
+  - condition: sun
+    after: sunset
+    before: sunrise
+  actions:
+  - action: light.turn_on
+    target:
+      entity_id: light.fred_office_light
+    data:
+      brightness_pct: 80
+  - action: notify.persistent_notification
+    data:
+      message: "Welcome home, Fred!"
+      title: "Home Assistant"
+  mode: single
+
+# ============================================
+# VOICE ASSISTANT INTEGRATED AUTOMATIONS
+# ============================================
+
+- id: 'morning_briefing'
+  alias: Morning Briefing
+  description: 'Daily morning briefing with weather and calendar'
+  triggers:
+  - platform: time
+    at: "07:00:00"
+  conditions:
+  - condition: state
+    entity_id: person.fred
+    state: 'home'
+  actions:
+  - action: script.morning_briefing
+  mode: single
+
+- id: 'calendar_reminder_15min'
+  alias: Calendar Event Reminder
+  description: 'Announce calendar events 15 minutes before they start'
+  triggers:
+  - platform: calendar
+    event: start
+    offset: "-00:15:00"
+    entity_id: calendar.personal_tasks
+  actions:
+  - action: tts.speak
+    target:
+      entity_id: media_player.piper_tts
+    data:
+      message: >
+        Reminder: You have {{ trigger.calendar_event.summary }}
+        in 15 minutes.
+  mode: queued
+  max: 5
+
+# ============================================
+# SMART DEVICE CONTROL AUTOMATIONS
+# ============================================
+
+- id: 'christmas_lights_on'
+  alias: Christmas Lights - Turn On
+  description: 'Turn on all Christmas lights 30 minutes before sunset'
+  triggers:
+  - platform: sun
+    event: sunset
+    offset: "-00:30:00"
+  actions:
+  - action: light.turn_on
+    target:
+      entity_id: light.all_christmas_lights
+  mode: single
+
+- id: 'christmas_lights_off'
+  alias: Christmas Lights - Turn Off
+  description: 'Turn off all Christmas lights at 1:00 AM'
+  triggers:
+  - platform: time
+    at: "01:00:00"
+  actions:
+  - action: light.turn_off
+    target:
+      entity_id: light.all_christmas_lights
+  mode: single
+
+- id: 'power_strip_energy_save'
+  alias: Power Strip - Energy Save Mode
+  description: 'Turn off unused power strip outlets late at night'
+  triggers:
+  - platform: time
+    at: "01:00:00"
+  conditions:
+  - condition: state
+    entity_id: person.fred
+    state: 'home'
+  actions:
+  - action: switch.turn_off
+    target:
+      entity_id:
+        - switch.power_strip_outlet_3
+        - switch.power_strip_outlet_4
+        - switch.power_strip_outlet_5
+  mode: single
+
+# ============================================
+# NOTIFICATIONS & ALERTS
+# ============================================
+
+- id: 'low_battery_alert'
+  alias: Low Battery Alert
+  description: 'Notify when device batteries are low'
+  triggers:
+  - platform: numeric_state
+    entity_id:
+      - sensor.fred_watch_battery
+    below: 20
+  actions:
+  - action: notify.persistent_notification
+    data:
+      message: "{{ trigger.to_state.name }} battery is at {{ trigger.to_state.state }}%"
+      title: "Low Battery Alert"
+  mode: single
+
+- id: 'security_alert_away'
+  alias: Security Alert - Motion While Away
+  description: 'Alert if motion detected while away'
+  triggers:
+  - platform: state
+    entity_id: binary_sensor.motion_sensor
+    to: 'on'
+  conditions:
+  - condition: state
+    entity_id: person.fred
+    state: 'not_home'
+  actions:
+  - action: notify.mobile_app
+    data:
+      message: "Motion detected at home while you're away!"
+      title: "Security Alert"
+  mode: single
+
+# ============================================
+# TIME-BASED AUTOMATIONS
+# ============================================
+
+- id: 'goodnight_reminder'
+  alias: Goodnight Reminder
+  description: 'Remind to run goodnight routine'
+  triggers:
+  - platform: time
+    at: "22:30:00"
+  conditions:
+  - condition: state
+    entity_id: person.fred
+    state: 'home'
+  actions:
+  - action: tts.speak
+    target:
+      entity_id: media_player.piper_tts
+    data:
+      message: "It's getting late. Don't forget to run your goodnight routine when you're ready for bed."
+  mode: single
+
+- id: 'weekly_todo_review'
+  alias: Weekly Todo Review
+  description: 'Sunday evening todo list review prompt'
+  triggers:
+  - platform: time
+    at: "18:00:00"
+  conditions:
+  - condition: time
+    weekday:
+      - sun
+  actions:
+  - action: tts.speak
+    target:
+      entity_id: media_player.piper_tts
+    data:
+      message: "It's Sunday evening. Time to review your todo lists and plan for the week ahead."
+  mode: single
