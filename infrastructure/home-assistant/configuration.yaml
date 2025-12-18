@@ -8,8 +8,6 @@ frontend:
 automation: !include automations.yaml
 script: !include scripts.yaml
 scene: !include scenes.yaml
-switch: !include switches.yaml
-light: !include lights.yaml
 
 http:
   use_x_forwarded_for: true
@@ -169,3 +167,66 @@ rest_command:
     url: "http://10.0.10.88/outlet?8=OFF"
     username: !secret dli_username
     password: !secret dli_password
+
+# ============================================
+# Digital Loggers Power Strip Template Switches
+# Modern template syntax (2025+)
+# ============================================
+
+template:
+  - switch:
+    - name: "Power Strip Outlet 1"
+      unique_id: power_strip_outlet_1
+      turn_on:
+        - action: rest_command.dli_outlet_1_on
+      turn_off:
+        - action: rest_command.dli_outlet_1_off
+
+    - name: "Power Strip Outlet 2"
+      unique_id: power_strip_outlet_2
+      turn_on:
+        - action: rest_command.dli_outlet_2_on
+      turn_off:
+        - action: rest_command.dli_outlet_2_off
+
+    - name: "Power Strip Outlet 3"
+      unique_id: power_strip_outlet_3
+      turn_on:
+        - action: rest_command.dli_outlet_3_on
+      turn_off:
+        - action: rest_command.dli_outlet_3_off
+
+    - name: "Power Strip Outlet 4"
+      unique_id: power_strip_outlet_4
+      turn_on:
+        - action: rest_command.dli_outlet_4_on
+      turn_off:
+        - action: rest_command.dli_outlet_4_off
+
+    - name: "Power Strip Outlet 5"
+      unique_id: power_strip_outlet_5
+      turn_on:
+        - action: rest_command.dli_outlet_5_on
+      turn_off:
+        - action: rest_command.dli_outlet_5_off
+
+    - name: "Power Strip Outlet 6"
+      unique_id: power_strip_outlet_6
+      turn_on:
+        - action: rest_command.dli_outlet_6_on
+      turn_off:
+        - action: rest_command.dli_outlet_6_off
+
+    - name: "Power Strip Outlet 7"
+      unique_id: power_strip_outlet_7
+      turn_on:
+        - action: rest_command.dli_outlet_7_on
+      turn_off:
+        - action: rest_command.dli_outlet_7_off
+
+    - name: "Power Strip Outlet 8"
+      unique_id: power_strip_outlet_8
+      turn_on:
+        - action: rest_command.dli_outlet_8_on
+      turn_off:
+        - action: rest_command.dli_outlet_8_off

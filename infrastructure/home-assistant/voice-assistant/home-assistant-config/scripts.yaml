@@ -1,0 +1,217 @@
+# Voice Assistant Scripts
+
+# Add Calendar Event
+add_calendar_event:
+  alias: "Add Calendar Event"
+  description: "Adds an event to the calendar"
+  fields:
+    title:
+      description: "Event title"
+      example: "Team meeting"
+    start_time:
+      description: "Start time"
+      example: "2024-01-15 14:00:00"
+    duration:
+      description: "Duration in hours"
+      example: 1
+  sequence:
+    - service: calendar.create_event
+      target:
+        entity_id: calendar.your_calendar
+      data:
+        summary: "{{ title }}"
+        start_date_time: "{{ start_time }}"
+        end_date_time: "{{ (start_time | as_timestamp + (duration * 3600)) | timestamp_custom('%Y-%m-%d %H:%M:%S') }}"
+
+# Add Task to Todo List
+add_task:
+  alias: "Add Task"
+  description: "Adds a task to the todo list"
+  fields:
+    task:
+      description: "Task description"
+      example: "Review project proposal"
+    list:
+      description: "Todo list name"
+      example: "personal_tasks"
+  sequence:
+    - service: todo.add_item
+      target:
+        entity_id: "todo.{{ list }}"
+      data:
+        item: "{{ task }}"
+
+# Complete Task
+complete_task:
+  alias: "Complete Task"
+  description: "Marks a task as complete"
+  fields:
+    task_name:
+      description: "Name of task to complete"
+      example: "Review project proposal"
+    list:
+      description: "Todo list name"
+      example: "personal_tasks"
+  sequence:
+    - service: todo.update_item
+      target:
+        entity_id: "todo.{{ list }}"
+      data:
+        item: "{{ task_name }}"
+        status: "completed"
+
+# Get Today's Agenda
+todays_agenda:
+  alias: "Today's Agenda"
+  description: "Announces today's calendar and tasks"
+  sequence:
+    - service: tts.speak
+      data:
+        entity_id: media_player.surface_go
+        message: >
+          {% set now_date = now().date() %}
+          Here's your agenda for {{ now().strftime('%A, %B %d') }}.
+
+          {% set events = state_attr('calendar.your_calendar', 'all_events') %}
+          {% if events %}
+            Calendar events:
+            {% for event in events[:5] %}
+              {{ event.summary }} at {{ event.start | as_timestamp | timestamp_custom('%I:%M %p') }}.
+            {% endfor %}
+          {% else %}
+            No calendar events scheduled.
+          {% endif %}
+
+          {% set tasks = states.todo | selectattr('state', 'eq', 'on') | list %}
+          {% if tasks | count > 0 %}
+            You have {{ tasks | count }} pending tasks.
+          {% else %}
+            No pending tasks.
+          {% endif %}
+
+# Get Weather Forecast
+weather_forecast:
+  alias: "Weather Forecast"
+  description: "Announces detailed weather forecast"
+  sequence:
+    - service: tts.speak
+      data:
+        entity_id: media_player.surface_go
+        message: >
+          Current weather: {{ state_attr('weather.local_weather', 'temperature') }} degrees,
+          {{ states('weather.local_weather') | replace('_', ' ') }}.
+          Humidity is {{ state_attr('weather.local_weather', 'humidity') }} percent.
+          Wind speed {{ state_attr('weather.local_weather', 'wind_speed') }} miles per hour.
+
+# List Pending Tasks
+list_pending_tasks:
+  alias: "List Pending Tasks"
+  description: "Reads out pending tasks"
+  sequence:
+    - service: tts.speak
+      data:
+        entity_id: media_player.surface_go
+        message: >
+          {% set personal = state_attr('todo.personal_tasks', 'items') | default([]) %}
+          {% set work = state_attr('todo.work_projects', 'items') | default([]) %}
+
+          {% if personal | count > 0 %}
+            Personal tasks:
+            {% for task in personal[:3] %}
+              {{ task.summary }}.
+            {% endfor %}
+          {% endif %}
+
+          {% if work | count > 0 %}
+            Work projects:
+            {% for task in work[:3] %}
+              {{ task.summary }}.
+            {% endfor %}
+          {% endif %}
+
+          {% if personal | count == 0 and work | count == 0 %}
+            No pending tasks. You're all caught up!
+          {% endif %}
+
+# Ask LLM Question
+ask_llm:
+  alias: "Ask LLM Question"
+  description: "Sends a question to the local LLM"
+  fields:
+    question:
+      description: "Question to ask"
+      example: "What should I focus on today?"
+  sequence:
+    - service: conversation.process
+      data:
+        agent_id: conversation.local_llm
+        text: "{{ question }}"
+      response_variable: llm_response
+    - service: tts.speak
+      data:
+        entity_id: media_player.surface_go
+        message: "{{ llm_response.response.speech.plain.speech }}"
+
+# Morning Routine
+morning_routine:
+  alias: "Morning Routine"
+  description: "Complete morning briefing with LLM insights"
+  sequence:
+    # Get weather
+    - service: script.weather_forecast
+    - delay: "00:00:02"
+
+    # Get agenda
+    - service: script.todays_agenda
+    - delay: "00:00:02"
+
+    # Ask LLM for productivity advice
+    - service: conversation.process
+      data:
+        agent_id: conversation.local_llm
+        text: >
+          Based on my calendar and tasks, give me one brief productivity tip for today.
+          Keep it under 20 words.
+      response_variable: llm_tip
+    - service: tts.speak
+      data:
+        entity_id: media_player.surface_go
+        message: "{{ llm_tip.response.speech.plain.speech }}"
+
+# Evening Review
+evening_review:
+  alias: "Evening Review"
+  description: "Reviews the day and plans for tomorrow"
+  sequence:
+    - service: conversation.process
+      data:
+        agent_id: conversation.local_llm
+        text: >
+          Help me review today. I have {{ states.todo | selectattr('state', 'eq', 'on') | list | count }} tasks remaining.
+          Give me a brief encouraging message and one tip for tomorrow. Keep it under 30 words.
+      response_variable: review
+    - service: tts.speak
+      data:
+        entity_id: media_player.surface_go
+        message: "{{ review.response.speech.plain.speech }}"
+
+# Project Status Update
+project_status:
+  alias: "Project Status Update"
+  description: "Gets status of work projects"
+  sequence:
+    - service: tts.speak
+      data:
+        entity_id: media_player.surface_go
+        message: >
+          {% set work = state_attr('todo.work_projects', 'items') | default([]) %}
+          {% set total = work | count %}
+          {% set completed = work | selectattr('status', 'eq', 'completed') | list | count %}
+
+          Work projects status:
+          {{ completed }} of {{ total }} tasks completed.
+          {% if total > completed %}
+            {{ total - completed }} tasks remaining.
+          {% else %}
+            All work projects complete!
+          {% endif %}

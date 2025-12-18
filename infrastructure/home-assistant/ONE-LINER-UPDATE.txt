@@ -1,0 +1,235 @@
+cd /mnt/data/supervisor/homeassistant && cp configuration.yaml configuration.yaml.backup_$(date +%Y%m%d_%H%M%S) && cat > configuration.yaml <<'EOF'
+# Loads default set of integrations. Do not remove.
+default_config:
+
+# Load frontend themes from the themes folder
+frontend:
+  themes: !include_dir_merge_named themes
+
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+
+http:
+  use_x_forwarded_for: true
+  trusted_proxies:
+    - 127.0.0.1
+
+homeassistant:
+  allowlist_external_urls:
+    - "https://bob.nianticbooks.com"
+
+# ============================================
+# Voice Assistant Configuration
+# Gaming PC IP: 10.0.10.10
+# ============================================
+
+# REQUIRED: Wyoming Protocol Integration
+wyoming:
+  # Whisper STT (Speech-to-Text)
+  - host: 10.0.10.10
+    port: 10300
+    protocol: tcp
+    name: "Whisper STT"
+
+  # Piper TTS (Text-to-Speech)
+  - host: 10.0.10.10
+    port: 10200
+    protocol: tcp
+    name: "Piper TTS"
+
+  # OpenWakeWord (Wake Word Detection)
+  - host: 10.0.10.10
+    port: 10400
+    protocol: tcp
+    name: "OpenWakeWord"
+
+# OPTIONAL: Weather Integration (Free)
+weather:
+  - platform: met
+    name: "Local Weather"
+
+# OPTIONAL: Todo/Task Lists
+todo:
+  - platform: local_todo
+    name: "Personal Tasks"
+  - platform: local_todo
+    name: "Work Projects"
+  - platform: local_todo
+    name: "Shopping List"
+
+# OPTIONAL: Voice Command Intent Scripts
+intent_script:
+  GetWeather:
+    speech:
+      text: >
+        The current temperature is {{ state_attr('weather.local_weather', 'temperature') }} degrees.
+        Currently {{ states('weather.local_weather') | replace('_', ' ') | title }}.
+    action:
+      - service: logbook.log
+        data:
+          name: "Weather Query"
+          message: "User asked about weather"
+
+  GetTime:
+    speech:
+      text: >
+        The current time is {{ now().strftime('%I:%M %p') }}.
+    action:
+      - service: logbook.log
+        data:
+          name: "Time Query"
+          message: "User asked about time"
+
+  GetDate:
+    speech:
+      text: >
+        Today is {{ now().strftime('%A, %B %d, %Y') }}.
+    action:
+      - service: logbook.log
+        data:
+          name: "Date Query"
+          message: "User asked about date"
+
+# ============================================
+# Digital Loggers Web Power Switch REST Commands
+# IP: 10.0.10.88
+# ============================================
+
+rest_command:
+  dli_outlet_1_on:
+    url: "http://10.0.10.88/outlet?1=ON"
+    username: !secret dli_username
+    password: !secret dli_password
+  dli_outlet_1_off:
+    url: "http://10.0.10.88/outlet?1=OFF"
+    username: !secret dli_username
+    password: !secret dli_password
+
+  dli_outlet_2_on:
+    url: "http://10.0.10.88/outlet?2=ON"
+    username: !secret dli_username
+    password: !secret dli_password
+  dli_outlet_2_off:
+    url: "http://10.0.10.88/outlet?2=OFF"
+    username: !secret dli_username
+    password: !secret dli_password
+
+  dli_outlet_3_on:
+    url: "http://10.0.10.88/outlet?3=ON"
+    username: !secret dli_username
+    password: !secret dli_password
+  dli_outlet_3_off:
+    url: "http://10.0.10.88/outlet?3=OFF"
+    username: !secret dli_username
+    password: !secret dli_password
+
+  dli_outlet_4_on:
+    url: "http://10.0.10.88/outlet?4=ON"
+    username: !secret dli_username
+    password: !secret dli_password
+  dli_outlet_4_off:
+    url: "http://10.0.10.88/outlet?4=OFF"
+    username: !secret dli_username
+    password: !secret dli_password
+
+  dli_outlet_5_on:
+    url: "http://10.0.10.88/outlet?5=ON"
+    username: !secret dli_username
+    password: !secret dli_password
+  dli_outlet_5_off:
+    url: "http://10.0.10.88/outlet?5=OFF"
+    username: !secret dli_username
+    password: !secret dli_password
+
+  dli_outlet_6_on:
+    url: "http://10.0.10.88/outlet?6=ON"
+    username: !secret dli_username
+    password: !secret dli_password
+  dli_outlet_6_off:
+    url: "http://10.0.10.88/outlet?6=OFF"
+    username: !secret dli_username
+    password: !secret dli_password
+
+  dli_outlet_7_on:
+    url: "http://10.0.10.88/outlet?7=ON"
+    username: !secret dli_username
+    password: !secret dli_password
+  dli_outlet_7_off:
+    url: "http://10.0.10.88/outlet?7=OFF"
+    username: !secret dli_username
+    password: !secret dli_password
+
+  dli_outlet_8_on:
+    url: "http://10.0.10.88/outlet?8=ON"
+    username: !secret dli_username
+    password: !secret dli_password
+  dli_outlet_8_off:
+    url: "http://10.0.10.88/outlet?8=OFF"
+    username: !secret dli_username
+    password: !secret dli_password
+
+# ============================================
+# Digital Loggers Power Strip Template Switches
+# Modern template syntax (2025+)
+# ============================================
+
+template:
+  - switch:
+    - name: "Power Strip Outlet 1"
+      unique_id: power_strip_outlet_1
+      turn_on:
+        - action: rest_command.dli_outlet_1_on
+      turn_off:
+        - action: rest_command.dli_outlet_1_off
+
+    - name: "Power Strip Outlet 2"
+      unique_id: power_strip_outlet_2
+      turn_on:
+        - action: rest_command.dli_outlet_2_on
+      turn_off:
+        - action: rest_command.dli_outlet_2_off
+
+    - name: "Power Strip Outlet 3"
+      unique_id: power_strip_outlet_3
+      turn_on:
+        - action: rest_command.dli_outlet_3_on
+      turn_off:
+        - action: rest_command.dli_outlet_3_off
+
+    - name: "Power Strip Outlet 4"
+      unique_id: power_strip_outlet_4
+      turn_on:
+        - action: rest_command.dli_outlet_4_on
+      turn_off:
+        - action: rest_command.dli_outlet_4_off
+
+    - name: "Power Strip Outlet 5"
+      unique_id: power_strip_outlet_5
+      turn_on:
+        - action: rest_command.dli_outlet_5_on
+      turn_off:
+        - action: rest_command.dli_outlet_5_off
+
+    - name: "Power Strip Outlet 6"
+      unique_id: power_strip_outlet_6
+      turn_on:
+        - action: rest_command.dli_outlet_6_on
+      turn_off:
+        - action: rest_command.dli_outlet_6_off
+
+    - name: "Power Strip Outlet 7"
+      unique_id: power_strip_outlet_7
+      turn_on:
+        - action: rest_command.dli_outlet_7_on
+      turn_off:
+        - action: rest_command.dli_outlet_7_off
+
+    - name: "Power Strip Outlet 8"
+      unique_id: power_strip_outlet_8
+      turn_on:
+        - action: rest_command.dli_outlet_8_on
+      turn_off:
+        - action: rest_command.dli_outlet_8_off
+EOF
+echo "Done! Config updated. Now run: exit && ha core check && ha core restart"

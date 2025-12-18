@@ -1,0 +1,390 @@
+# ============================================
+# Headache Tracking System for VA Disability Claim
+# Purpose: Track migraines for 50% VA rating documentation
+# ============================================
+
+# Instructions:
+# 1. Copy the sections below into your main configuration.yaml
+# 2. Or use: !include headache-tracking-config.yaml
+# 3. Restart Home Assistant after adding
+# 4. Go to Settings > Dashboards > Add new dashboard for headache tracking
+
+# ============================================
+# INPUT HELPERS (Manual Configuration)
+# ============================================
+# Note: These can also be created via UI:
+# Settings > Devices & Services > Helpers > Create Helper
+
+input_button:
+  log_headache:
+    name: "Log New Headache"
+    icon: mdi:head-alert
+
+input_datetime:
+  headache_start:
+    name: "Headache Start Time"
+    has_date: true
+    has_time: true
+
+  headache_end:
+    name: "Headache End Time"
+    has_date: true
+    has_time: true
+
+input_number:
+  headache_severity:
+    name: "Severity (1-10)"
+    min: 1
+    max: 10
+    step: 1
+    mode: slider
+    icon: mdi:gauge
+
+input_select:
+  headache_location:
+    name: "Pain Location"
+    options:
+      - Front of head
+      - Back of head/neck
+      - Left side
+      - Right side
+      - Both sides
+      - Behind eyes
+      - Other
+    icon: mdi:head-dots-horizontal
+
+  headache_pain_type:
+    name: "Pain Type"
+    options:
+      - Throbbing/pulsating
+      - Sharp/stabbing
+      - Dull/pressure
+      - Burning
+      - Other
+    icon: mdi:head-snowflake
+
+  headache_trigger:
+    name: "Trigger (if known)"
+    options:
+      - Stress
+      - Lack of sleep
+      - Weather changes
+      - Bright lights
+      - Physical activity
+      - Neck movement/position
+      - Missed medication
+      - Unknown
+      - Other
+    icon: mdi:alert-circle
+
+input_boolean:
+  headache_prostrating:
+    name: "Prostrating (Had to lie down)"
+    icon: mdi:bed
+
+  headache_nausea:
+    name: "Nausea"
+    icon: mdi:stomach
+
+  headache_vomiting:
+    name: "Vomiting"
+    icon: mdi:emoticon-sick
+
+  headache_light_sensitivity:
+    name: "Light Sensitivity"
+    icon: mdi:brightness-7
+
+  headache_sound_sensitivity:
+    name: "Sound Sensitivity"
+    icon: mdi:volume-high
+
+  headache_visual_disturbance:
+    name: "Visual Disturbances"
+    icon: mdi:eye-off
+
+  headache_dizziness:
+    name: "Dizziness/Vertigo"
+    icon: mdi:head-sync
+
+  headache_neck_pain:
+    name: "Neck Pain/Stiffness"
+    icon: mdi:neck
+
+  headache_concentration:
+    name: "Difficulty Concentrating"
+    icon: mdi:head-question
+
+  headache_missed_work:
+    name: "Missed Work"
+    icon: mdi:briefcase-off
+
+  headache_left_work_early:
+    name: "Left Work Early"
+    icon: mdi:door-open
+
+  headache_bedridden:
+    name: "Completely Bedridden"
+    icon: mdi:bed-king
+
+  headache_no_household_tasks:
+    name: "Could Not Do Household Tasks"
+    icon: mdi:home-off
+
+  headache_no_drive:
+    name: "Could Not Drive"
+    icon: mdi:car-off
+
+input_text:
+  headache_duration:
+    name: "Duration (e.g., 4 hours)"
+    max: 50
+    icon: mdi:clock
+
+  headache_treatment:
+    name: "Treatment Taken"
+    max: 200
+    mode: text
+    icon: mdi:pill
+
+  headache_work_hours_lost:
+    name: "Work Hours Lost"
+    max: 10
+    icon: mdi:clock-alert
+
+  headache_notes:
+    name: "Additional Notes"
+    max: 500
+    mode: text
+    icon: mdi:note-text
+
+# ============================================
+# COUNTER for tracking total episodes
+# ============================================
+counter:
+  headache_count_this_month:
+    name: "Headaches This Month"
+    icon: mdi:counter
+    restore: true
+
+  headache_prostrating_count:
+    name: "Prostrating Headaches This Month"
+    icon: mdi:bed-king-outline
+    restore: true
+
+# ============================================
+# SCRIPT to log headache to file
+# ============================================
+script:
+  save_headache_log:
+    alias: "Save Headache Log Entry"
+    icon: mdi:content-save
+    sequence:
+      - service: notify.persistent_notification
+        data:
+          title: "Headache Logged"
+          message: >
+            Headache logged at {{ states('input_datetime.headache_start') }}.
+            Severity: {{ states('input_number.headache_severity') }}/10.
+            {% if is_state('input_boolean.headache_prostrating', 'on') %}PROSTRATING - Had to lie down.{% endif %}
+            {% if is_state('input_boolean.headache_missed_work', 'on') %}MISSED WORK.{% endif %}
+
+      - service: counter.increment
+        target:
+          entity_id: counter.headache_count_this_month
+
+      - condition: state
+        entity_id: input_boolean.headache_prostrating
+        state: 'on'
+
+      - service: counter.increment
+        target:
+          entity_id: counter.headache_prostrating_count
+
+  reset_headache_form:
+    alias: "Reset Headache Form"
+    icon: mdi:eraser
+    sequence:
+      - service: input_number.set_value
+        target:
+          entity_id: input_number.headache_severity
+        data:
+          value: 5
+
+      - service: input_boolean.turn_off
+        target:
+          entity_id:
+            - input_boolean.headache_prostrating
+            - input_boolean.headache_nausea
+            - input_boolean.headache_vomiting
+            - input_boolean.headache_light_sensitivity
+            - input_boolean.headache_sound_sensitivity
+            - input_boolean.headache_visual_disturbance
+            - input_boolean.headache_dizziness
+            - input_boolean.headache_neck_pain
+            - input_boolean.headache_concentration
+            - input_boolean.headache_missed_work
+            - input_boolean.headache_left_work_early
+            - input_boolean.headache_bedridden
+            - input_boolean.headache_no_household_tasks
+            - input_boolean.headache_no_drive
+
+      - service: input_text.set_value
+        target:
+          entity_id:
+            - input_text.headache_duration
+            - input_text.headache_treatment
+            - input_text.headache_work_hours_lost
+            - input_text.headache_notes
+        data:
+          value: ""
+
+# ============================================
+# AUTOMATION to remind monthly summary
+# ============================================
+automation:
+  - alias: "Monthly Headache Summary Reminder"
+    description: "Remind to update monthly headache summary on last day of month"
+    trigger:
+      - platform: time
+        at: "18:00:00"
+    condition:
+      - condition: template
+        value_template: >
+          {{ now().day == (now().replace(day=1) + timedelta(days=32)).replace(day=1).day - 1 }}
+    action:
+      - service: notify.persistent_notification
+        data:
+          title: "Monthly Headache Summary Needed"
+          message: >
+            Today is the last day of the month. Update your monthly headache summary!
+
+            This month's stats:
+            - Total headaches: {{ states('counter.headache_count_this_month') }}
+            - Prostrating episodes: {{ states('counter.headache_prostrating_count') }}
+
+            Remember to update your markdown log file and reset counters for next month.
+
+# ============================================
+# SENSOR for tracking statistics
+# ============================================
+template:
+  - sensor:
+      - name: "Headache Frequency This Month"
+        unique_id: headache_frequency_monthly
+        state: >
+          {{ states('counter.headache_count_this_month') | int }}
+        unit_of_measurement: "headaches"
+        icon: mdi:head-alert
+        attributes:
+          prostrating_count: >
+            {{ states('counter.headache_prostrating_count') | int }}
+          days_in_month: >
+            {{ now().day }}
+          average_per_week: >
+            {% set weeks = (now().day / 7) | round(0, 'ceil') %}
+            {% if weeks > 0 %}
+              {{ (states('counter.headache_count_this_month') | int / weeks) | round(1) }}
+            {% else %}
+              0
+            {% endif %}
+
+# ============================================
+# DASHBOARD YAML (Manual - Add via UI or YAML mode)
+# ============================================
+# Create a new dashboard in Home Assistant UI and paste this:
+#
+# views:
+#   - title: "Headache Log - VA Claim"
+#     path: headache-log
+#     icon: mdi:head-alert
+#     cards:
+#       - type: vertical-stack
+#         cards:
+#           - type: markdown
+#             content: |
+#               # 🏥 Migraine Headache Tracker
+#               **For VA Disability Claim - 50% Rating Goal**
+#
+#               Track every headache for 30-60 days. Focus on:
+#               - **Prostrating** (had to lie down)
+#               - **Economic impact** (missed work)
+#               - **Connection to neck/cervical spine**
+#
+#           - type: entities
+#             title: "📊 This Month's Stats"
+#             entities:
+#               - sensor.headache_frequency_this_month
+#               - counter.headache_count_this_month
+#               - counter.headache_prostrating_count
+#
+#       - type: vertical-stack
+#         title: "Log New Headache"
+#         cards:
+#           - type: entities
+#             title: "Time & Severity"
+#             entities:
+#               - input_datetime.headache_start
+#               - input_datetime.headache_end
+#               - input_text.headache_duration
+#               - input_number.headache_severity
+#
+#           - type: entities
+#             title: "Pain Details"
+#             entities:
+#               - input_select.headache_location
+#               - input_select.headache_pain_type
+#               - input_select.headache_trigger
+#
+#           - type: entities
+#             title: "Symptoms"
+#             entities:
+#               - input_boolean.headache_nausea
+#               - input_boolean.headache_vomiting
+#               - input_boolean.headache_light_sensitivity
+#               - input_boolean.headache_sound_sensitivity
+#               - input_boolean.headache_visual_disturbance
+#               - input_boolean.headache_dizziness
+#               - input_boolean.headache_neck_pain
+#               - input_boolean.headache_concentration
+#
+#           - type: entities
+#             title: "⭐ CRITICAL FOR VA CLAIM"
+#             entities:
+#               - input_boolean.headache_prostrating
+#               - input_boolean.headache_missed_work
+#               - input_boolean.headache_left_work_early
+#               - input_boolean.headache_bedridden
+#               - input_boolean.headache_no_household_tasks
+#               - input_boolean.headache_no_drive
+#               - input_text.headache_work_hours_lost
+#
+#           - type: entities
+#             title: "Treatment & Notes"
+#             entities:
+#               - input_text.headache_treatment
+#               - input_text.headache_notes
+#
+#           - type: horizontal-stack
+#             cards:
+#               - type: button
+#                 name: "Save Entry"
+#                 icon: mdi:content-save
+#                 tap_action:
+#                   action: call-service
+#                   service: script.save_headache_log
+#               - type: button
+#                 name: "Reset Form"
+#                 icon: mdi:eraser
+#                 tap_action:
+#                   action: call-service
+#                   service: script.reset_headache_form
+
+# ============================================
+# NOTES
+# ============================================
+# - Data is stored in Home Assistant history database
+# - Use Developer Tools > States to view logged data
+# - Use History panel to see timeline of headaches
+# - Export data: Use built-in history or add a logbook card
+# - For VA claim: Transfer data to markdown log monthly
+# - Keep both digital (HA) and paper trail (markdown) for redundancy

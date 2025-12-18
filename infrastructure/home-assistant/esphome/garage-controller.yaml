@@ -1,0 +1,146 @@
+  esphome:
+    name: garage-controller
+    friendly_name: Garage Controller
+
+  esp32:
+    board: esp32dev
+    framework:
+      type: arduino
+
+  logger:
+
+  api:
+    encryption:
+      key: "iY87lFmP2/XHEvjQ+sCWEdnxPqiFRBnSuW/Hj9EGp9g="
+
+  ota:
+    - platform: esphome
+      password: "garage-controller-ota"
+
+  wifi:
+    ssid: !secret wifi_ssid
+    password: !secret wifi_password
+    ap:
+      ssid: "Garage-Controller-AP"
+      password: "fallback123"
+
+  captive_portal:
+
+  i2c:
+    sda: GPIO21
+    scl: GPIO22
+    scan: true
+
+  status_led:
+    pin: GPIO23
+
+  switch:
+    - platform: gpio
+      pin:
+        number: GPIO32
+        inverted: true
+      name: "North Garage Door"
+      id: relay1
+      icon: "mdi:garage"
+      on_turn_on:
+        - delay: 250ms
+        - switch.turn_off: relay1
+
+    - platform: gpio
+      pin:
+        number: GPIO33
+        inverted: true
+      name: "South Garage Door"
+      id: relay2
+      icon: "mdi:garage"
+      on_turn_on:
+        - delay: 250ms
+        - switch.turn_off: relay2
+
+    - platform: gpio
+      pin:
+        number: GPIO25
+        inverted: true
+      name: "North Bay Lights"
+      id: relay3
+      icon: "mdi:lightbulb"
+
+    - platform: gpio
+      pin:
+        number: GPIO26
+        inverted: true
+      name: "South Bay Lights"
+      id: relay4
+      icon: "mdi:lightbulb"
+
+    - platform: gpio
+      pin:
+        number: GPIO27
+        inverted: true
+      name: "Workbench Lights"
+      id: relay5
+      icon: "mdi:desk-lamp"
+
+    - platform: gpio
+      pin:
+        number: GPIO14
+        inverted: true
+      name: "Furnace"
+      id: relay6
+      icon: "mdi:fire"
+
+    - platform: gpio
+      pin:
+        number: GPIO12
+        inverted: true
+      name: "Relay 7"
+      id: relay7
+
+    - platform: gpio
+      pin:
+        number: GPIO13
+        inverted: true
+      name: "Relay 8"
+      id: relay8
+
+  sensor:
+    - platform: wifi_signal
+      name: "WiFi Signal"
+      update_interval: 60s
+
+    - platform: uptime
+      name: "Uptime"
+
+    - platform: aht10
+      variant: AHT20
+      temperature:
+        name: "Garage Temperature"
+        id: aht_temp
+      humidity:
+        name: "Garage Humidity"
+        id: aht_humidity
+      update_interval: 30s
+
+    - platform: bmp280_i2c
+      temperature:
+        name: "Garage Temperature (BMP)"
+        id: bmp_temp
+        oversampling: 16x
+      pressure:
+        name: "Garage Pressure"
+        id: bmp_pressure
+      address: 0x77
+      update_interval: 30s
+
+  text_sensor:
+    - platform: wifi_info
+      ip_address:
+        name: "IP Address"
+      ssid:
+        name: "Connected SSID"
+      mac_address:
+        name: "MAC Address"
+
+  button:
+    - platform: restart
+      name: "Restart"

@@ -1,0 +1,106 @@
+version: '3.8'
+
+services:
+  # Ollama - Local LLM Server with GPU support
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    restart: unless-stopped
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    environment:
+      - OLLAMA_HOST=0.0.0.0
+    networks:
+      - voice_assistant
+
+  # Faster-Whisper STT with GPU acceleration
+  whisper:
+    image: rhasspy/wyoming-whisper:latest
+    container_name: whisper
+    restart: unless-stopped
+    ports:
+      - "10300:10300"
+    volumes:
+      - whisper_data:/data
+    command: >
+      --model large-v3
+      --language en
+      --beam-size 5
+      --device cuda
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    environment:
+      - CUDA_VISIBLE_DEVICES=0
+    networks:
+      - voice_assistant
+
+  # Piper TTS - Natural voice synthesis
+  piper:
+    image: rhasspy/wyoming-piper:latest
+    container_name: piper
+    restart: unless-stopped
+    ports:
+      - "10200:10200"
+    volumes:
+      - piper_data:/data
+    command: >
+      --voice en_US-lessac-medium
+    networks:
+      - voice_assistant
+
+  # OpenWakeWord - Wake word detection
+  openwakeword:
+    image: rhasspy/wyoming-openwakeword:latest
+    container_name: openwakeword
+    restart: unless-stopped
+    ports:
+      - "10400:10400"
+    volumes:
+      - openwakeword_data:/data
+      - ./config/custom-wakewords:/custom-wakewords
+    command: >
+      --preload-model 'ok_nabu'
+      --custom-model-dir /custom-wakewords
+    networks:
+      - voice_assistant
+
+  # Ollama Web UI (optional - for testing/management)
+  ollama-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: ollama-webui
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    volumes:
+      - ollama_webui_data:/app/backend/data
+    environment:
+      - OLLAMA_BASE_URL=http://ollama:11434
+    depends_on:
+      - ollama
+    networks:
+      - voice_assistant
+
+volumes:
+  ollama_data:
+  whisper_data:
+  piper_data:
+  openwakeword_data:
+  ollama_webui_data:
+
+networks:
+  voice_assistant:
+    driver: bridge

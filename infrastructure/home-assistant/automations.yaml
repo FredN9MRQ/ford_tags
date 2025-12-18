@@ -92,27 +92,31 @@
 
 - id: 'christmas_lights_on'
   alias: Christmas Lights - Turn On
-  description: 'Turn on all Christmas lights 30 minutes before sunset'
+  description: 'Turn on Christmas lights at sunset'
   triggers:
   - platform: sun
     event: sunset
     offset: "-00:30:00"
+  conditions:
+  - condition: time
+    after: "16:00:00"
+    before: "23:00:00"
   actions:
-  - action: light.turn_on
+  - action: switch.turn_on
     target:
-      entity_id: light.all_christmas_lights
+      entity_id: switch.christmas_lights
   mode: single
 
 - id: 'christmas_lights_off'
   alias: Christmas Lights - Turn Off
-  description: 'Turn off all Christmas lights at 1:00 AM'
+  description: 'Turn off Christmas lights at bedtime'
   triggers:
   - platform: time
-    at: "01:00:00"
+    at: "23:00:00"
   actions:
-  - action: light.turn_off
+  - action: switch.turn_off
     target:
-      entity_id: light.all_christmas_lights
+      entity_id: switch.christmas_lights
   mode: single
 
 - id: 'power_strip_energy_save'
