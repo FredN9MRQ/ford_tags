@@ -21,7 +21,21 @@
       "Bash(git remote add:*)",
       "Bash(git push:*)",
       "Bash(git push)",
-      "Bash(git rm:*)"
+      "Bash(git rm:*)",
+      "Bash(ollama list:*)",
+      "Bash(ollama --version:*)",
+      "Bash(nvidia-smi:*)",
+      "Bash(pip install:*)",
+      "Bash(ollama pull:*)",
+      "Bash(aider --version:*)",
+      "Bash(aider:*)",
+      "Bash(ssh root@10.0.10.3 \"pct list | grep -i grafana || qm list | grep -i grafana || echo ''Checking for Grafana process...''; ps aux | grep -i grafana | grep -v grep | head -5\")",
+      "Bash(ssh root@10.0.10.3 \"pct exec 121 -- curl -s -H ''Authorization: Bearer f7AsYT6FLZEWVvmN59lC0IQZfMLdgMniVPYhVwmYAFSKHez4aGxyn4Esm86r'' http://localhost:9000/api/v3/providers/oauth2/ | python3 -m json.tool | grep -A 20 proxmox\")",
+      "Bash(ssh root@10.0.10.3 \"pct exec 121 -- curl -s -H ''Authorization: Bearer f7AsYT6FLZEWVvmN59lC0IQZfMLdgMniVPYhVwmYAFSKHez4aGxyn4Esm86r'' http://localhost:9000/api/v3/providers/oauth2/ | python3 -m json.tool | grep -B 5 -A 30 ''\"\"client_id\"\": \"\"proxmox\"\"''\")",
+      "Bash(powershell.exe -File:*)",
+      "Bash(powershell.exe -Command \"Test-NetConnection -ComputerName 10.0.10.10 -Port 9182 | Select-Object -Property ComputerName,RemotePort,TcpTestSucceeded\")",
+      "Bash(echo:*)",
+      "Bash(showmount:*)"
     ]
   }
 }

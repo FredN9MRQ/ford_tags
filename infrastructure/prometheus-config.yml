@@ -1,0 +1,240 @@
+# Prometheus Configuration for Fred's Homelab
+# Last Updated: 2025-12-25
+#
+# Installation Instructions:
+# 1. Install node_exporter on each host you want to monitor
+# 2. Copy this file to 10.0.10.25:/etc/prometheus/prometheus.yml
+# 3. Restart Prometheus: systemctl restart prometheus
+# 4. Verify targets: http://10.0.10.25:9090/targets
+
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  external_labels:
+    environment: 'homelab'
+    datacenter: 'home'
+
+# Alertmanager configuration (optional - configure later)
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+          # - alertmanager:9093
+
+# Load alerting rules
+rule_files:
+  # - "/etc/prometheus/alerts/*.yml"
+
+scrape_configs:
+  # ====================================
+  # Prometheus Self-Monitoring
+  # ====================================
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+        labels:
+          app: 'prometheus'
+          instance: 'prometheus-main'
+
+  # ====================================
+  # Proxmox Hosts (Node Exporters)
+  # ====================================
+  # Install: apt install prometheus-node-exporter
+
+  - job_name: 'proxmox-nodes'
+    static_configs:
+      - targets: ['10.0.10.2:9100']  # pve-router (i5)
+        labels:
+          hostname: 'pve-router'
+          role: 'proxmox-host'
+          location: 'office'
+
+      - targets: ['10.0.10.3:9100']  # main-pve (DL380p)
+        labels:
+          hostname: 'main-pve'
+          role: 'proxmox-host'
+          location: 'remote'
+
+      - targets: ['10.0.10.4:9100']  # backup-pve
+        labels:
+          hostname: 'backup-pve'
+          role: 'proxmox-host'
+          location: 'storage'
+
+  # ====================================
+  # Proxmox VE API Metrics (Proxmox Exporter)
+  # ====================================
+  # Optional: Install https://github.com/prometheus-pve/prometheus-pve-exporter
+  # This gives you VM/CT specific metrics
+
+  # - job_name: 'proxmox-api'
+  #   static_configs:
+  #     - targets: ['10.0.10.25:9221']  # Run pve_exporter on prometheus host
+  #       labels:
+  #         exporter: 'pve_exporter'
+
+  # ====================================
+  # VPS (Node Exporter)
+  # ====================================
+  # Install on VPS: apt install prometheus-node-exporter
+
+  - job_name: 'vps'
+    static_configs:
+      - targets: ['66.63.182.168:9100']  # VPS external IP
+        labels:
+          hostname: 'vps-hv'
+          role: 'vps'
+          provider: 'hudson-valley-host'
+
+  # ====================================
+  # Gaming PC / HOMELAB-COMMAND
+  # ====================================
+  # Windows: Use windows_exporter
+  # https://github.com/prometheus-community/windows_exporter
+
+  - job_name: 'gaming-pc'
+    static_configs:
+      - targets: ['10.0.10.10:9182']  # windows_exporter default port
+        labels:
+          hostname: 'HOMELAB-COMMAND'
+          role: 'workstation'
+          os: 'windows-11'
+
+  # ====================================
+  # Databases
+  # ====================================
+
+  # PostgreSQL Exporter
+  # Install: https://github.com/prometheus-community/postgres_exporter
+  - job_name: 'postgresql'
+    static_configs:
+      - targets: ['10.0.10.20:9187']
+        labels:
+          hostname: 'postgresql'
+          role: 'database'
+          app: 'postgres'
+
+  # ====================================
+  # Application Services
+  # ====================================
+
+  # Authentik (built-in metrics)
+  - job_name: 'authentik'
+    metrics_path: '/application/o/prometheus-outpost/metrics/'
+    static_configs:
+      - targets: ['10.0.10.21:9000']
+        labels:
+          app: 'authentik'
+          role: 'sso'
+
+  # n8n (if metrics enabled)
+  # - job_name: 'n8n'
+  #   static_configs:
+  #     - targets: ['10.0.10.22:5678']
+  #       labels:
+  #         app: 'n8n'
+
+  # Home Assistant (via integration)
+  # https://www.home-assistant.io/integrations/prometheus/
+  - job_name: 'homeassistant'
+    metrics_path: '/api/prometheus'
+    bearer_token: 'YOUR_LONG_LIVED_ACCESS_TOKEN'  # Create in HA: Profile -> Long-Lived Access Tokens
+    static_configs:
+      - targets: ['10.0.10.24:8123']
+        labels:
+          app: 'homeassistant'
+          role: 'automation'
+
+  # Caddy (metrics built-in, needs admin API enabled)
+  # - job_name: 'caddy'
+  #   static_configs:
+  #     - targets: ['66.63.182.168:2019']  # Caddy admin API
+  #       labels:
+  #         app: 'caddy'
+  #         role: 'reverse-proxy'
+
+  # ====================================
+  # Network Devices
+  # ====================================
+
+  # UCG Ultra (SNMP Exporter)
+  # https://github.com/prometheus/snmp_exporter
+  # - job_name: 'unifi-gateway'
+  #   static_configs:
+  #     - targets: ['10.0.10.1']
+  #       labels:
+  #         device: 'ucg-ultra'
+  #         role: 'gateway'
+
+  # ====================================
+  # Storage
+  # ====================================
+
+  # OpenMediaVault Node Exporter
+  - job_name: 'storage'
+    static_configs:
+      - targets: ['10.0.10.5:9100']
+        labels:
+          hostname: 'openmediavault'
+          role: 'storage'
+          capacity: '12tb'
+
+  # ====================================
+  # Blackbox Exporter (Endpoint Monitoring)
+  # ====================================
+  # Optional: Monitor HTTP endpoints, SSL certs, DNS, etc.
+  # https://github.com/prometheus/blackbox_exporter
+
+  # - job_name: 'blackbox-http'
+  #   metrics_path: /probe
+  #   params:
+  #     module: [http_2xx]
+  #   static_configs:
+  #     - targets:
+  #       - https://auth.nianticbooks.com
+  #       - https://freddesk.nianticbooks.com
+  #       - https://bob.nianticbooks.com
+  #   relabel_configs:
+  #     - source_labels: [__address__]
+  #       target_label: __param_target
+  #     - source_labels: [__param_target]
+  #       target_label: instance
+  #     - target_label: __address__
+  #       replacement: localhost:9115  # Blackbox exporter address
+
+# ====================================
+# Installation Quick Reference
+# ====================================
+#
+# Node Exporter (Debian/Ubuntu):
+#   apt update && apt install prometheus-node-exporter -y
+#   systemctl enable prometheus-node-exporter
+#   systemctl start prometheus-node-exporter
+#   # Verify: curl http://localhost:9100/metrics
+#
+# Node Exporter (Manual install):
+#   wget https://github.com/prometheus/node_exporter/releases/download/v1.7.0/node_exporter-1.7.0.linux-amd64.tar.gz
+#   tar xvfz node_exporter-*.tar.gz
+#   sudo mv node_exporter-*/node_exporter /usr/local/bin/
+#   sudo useradd -rs /bin/false node_exporter
+#
+#   # Create systemd service: /etc/systemd/system/node_exporter.service
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable node_exporter
+#   sudo systemctl start node_exporter
+#
+# Windows Exporter:
+#   Download: https://github.com/prometheus-community/windows_exporter/releases
+#   Install MSI package
+#   Verify: http://localhost:9182/metrics
+#
+# PostgreSQL Exporter:
+#   apt install prometheus-postgres-exporter -y
+#   # Configure connection in /etc/default/prometheus-postgres-exporter
+#   # DATA_SOURCE_NAME="postgresql://user:pass@localhost:5432/postgres?sslmode=disable"
+#
+# Home Assistant Prometheus Integration:
+#   1. Settings -> Devices & Services -> Add Integration
+#   2. Search "Prometheus"
+#   3. Configure
+#   4. Create long-lived access token: Profile -> Security -> Long-Lived Access Tokens

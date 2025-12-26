@@ -18,6 +18,9 @@ homeassistant:
   allowlist_external_urls:
     - "https://bob.nianticbooks.com"
 
+# Prometheus metrics export
+prometheus:
+
 # ============================================
 # Voice Assistant Configuration
 # Gaming PC IP: 10.0.10.10
