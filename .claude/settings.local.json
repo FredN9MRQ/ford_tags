@@ -35,7 +35,18 @@
       "Bash(powershell.exe -File:*)",
       "Bash(powershell.exe -Command \"Test-NetConnection -ComputerName 10.0.10.10 -Port 9182 | Select-Object -Property ComputerName,RemotePort,TcpTestSucceeded\")",
       "Bash(echo:*)",
-      "Bash(showmount:*)"
+      "Bash(showmount:*)",
+      "Bash(start index.html)",
+      "Bash(start http://10.0.10.27:8080)",
+      "Bash(openssl req:*)",
+      "Bash(tee:*)",
+      "Bash(ls:*)",
+      "Bash(powershell.exe -Command \"\n# Import the certificate to the Trusted Root Certification Authorities store\n$cert = New-Object System.Security.Cryptography.X509Certificates.X509Certificate2\n$cert.Import(''C:\\Users\\Fred\\projects\\infrastructure\\Homelab-Root-CA.crt'')\n$store = New-Object System.Security.Cryptography.X509Certificates.X509Store(''Root'',''CurrentUser'')\n$store.Open(''ReadWrite'')\n$store.Add($cert)\n$store.Close()\nWrite-Host ''CA root certificate installed successfully!'' -ForegroundColor Green\nWrite-Host ''Subject: '' $cert.Subject -ForegroundColor Cyan\nWrite-Host ''Issuer: '' $cert.Issuer -ForegroundColor Cyan\nWrite-Host ''Valid until: '' $cert.NotAfter -ForegroundColor Cyan\n\")",
+      "Bash(openssl s_client:*)",
+      "Bash(openssl x509:*)",
+      "Bash(powershell.exe -Command \"\n# Import the certificate to the LocalMachine Trusted Root store (system-wide)\n$cert = New-Object System.Security.Cryptography.X509Certificates.X509Certificate2\n$cert.Import(''C:\\Users\\Fred\\projects\\infrastructure\\Homelab-Root-CA.crt'')\n$store = New-Object System.Security.Cryptography.X509Certificates.X509Store(''Root'',''LocalMachine'')\n$store.Open(''ReadWrite'')\n$store.Add($cert)\n$store.Close()\nWrite-Host ''CA root certificate installed system-wide!'' -ForegroundColor Green\n\")",
+      "Bash(powershell.exe -Command \"Get-Service -Name sshd | Select-Object Name, Status, StartType\")",
+      "Bash(powershell.exe:*)"
     ]
   }
 }
