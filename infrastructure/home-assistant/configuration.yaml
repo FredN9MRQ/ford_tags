@@ -14,6 +14,9 @@ http:
   trusted_proxies:
     - 127.0.0.1
 
+  ssl_certificate: /config/fullchain.pem
+  ssl_key: /config/privkey.pem
+
 homeassistant:
   allowlist_external_urls:
     - "https://bob.nianticbooks.com"

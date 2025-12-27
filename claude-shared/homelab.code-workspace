@@ -1,0 +1,48 @@
+{
+	"folders": [
+		{
+			"name": "Infrastructure",
+			"path": "../infrastructure"
+		},
+		{
+			"name": "Claude Shared Context",
+			"path": "."
+		},
+		{
+			"name": "Home Assistant",
+			"path": "../home-assistant"
+		}
+	],
+	"settings": {
+		"files.exclude": {
+			"**/.git": true,
+			"**/.DS_Store": true,
+			"**/node_modules": true,
+			"**/__pycache__": true
+		},
+		"claude.contextFiles": [
+			"${workspaceFolder:Claude Shared Context}/README.md",
+			"${workspaceFolder:Claude Shared Context}/QUICK-START.md",
+			"${workspaceFolder:Claude Shared Context}/SETUP-GUIDE.md",
+			"${workspaceFolder:Claude Shared Context}/GAMING-RIG-SETUP.md",
+			"${workspaceFolder:Infrastructure}/CLAUDE.md",
+			"${workspaceFolder:Infrastructure}/IP-ALLOCATION.md"
+		],
+		"editor.fontSize": 14,
+		"editor.lineHeight": 24,
+		"editor.wordWrap": "on",
+		"terminal.integrated.fontSize": 13
+	},
+	"extensions": {
+		"recommendations": [
+			"anthropic.claude-code",
+			"ms-vscode-remote.remote-ssh",
+			"redhat.vscode-yaml",
+			"esbenp.prettier-vscode"
+		]
+	},
+	"launch": {
+		"version": "0.2.0",
+		"configurations": []
+	}
+}
