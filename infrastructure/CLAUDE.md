@@ -85,8 +85,9 @@ ssh user@host "chmod +x /usr/local/bin/script-name.sh"
 
 ### Key Scripts
 
-- `backup-proxmox.sh` - Proxmox VM/container backups (daily on Proxmox nodes)
-- `backup-vps.sh` - VPS configuration backups (daily on VPS)
+- `backup-proxmox-to-omv.sh` - ✅ **DEPLOYED** Proxmox VM/container backups to OMV NFS (daily 2:30 AM on all Proxmox nodes)
+- `backup-postgresql.sh` - ✅ **DEPLOYED** PostgreSQL database backups (daily 2:00 AM on main-pve)
+- `backup-vps-configs.sh` - VPS configuration backups (ready to deploy on VPS)
 - `health-check.sh` - Service health monitoring (every 5-15 min)
 - `cert-check.sh` - SSL expiration monitoring (daily)
 - `tunnel-monitor.sh` - **DEPRECATED** (monitored Gerbil tunnels, needs WireGuard replacement)
@@ -242,6 +243,44 @@ git push
 
 ## Planned Service Deployments
 
+### 3-Tier Backup System ✅ DEPLOYED
+
+**Status:** Fully operational
+**Deployment Date:** 2025-12-26
+
+**Tier 1 - Local (OMV NFS):**
+- Storage: 10.0.10.5:/export/backups (7.3TB available, 159GB used)
+- Mounted on: main-pve, pve-router, pve-storage at /mnt/omv-backups
+- Optimized NFS mount: rsize/wsize=32768, NFSv3, TCP
+- Performance: 65 MB/s (250x improvement from initial 300 KB/s)
+
+**Automated Backups:**
+- ✅ **2:00 AM daily:** PostgreSQL (all databases) - ~13MB compressed
+  - Container 102: n8n, rustdesk, grafana, authentik databases
+- ✅ **2:30 AM daily:** Proxmox VMs/containers (all hosts)
+  - main-pve: 1 VM + 13 containers (backup verified successful)
+  - pve-router: 1 VM + 2 containers
+  - pve-storage: Ready
+- Retention: 7 days (daily), 4 weeks (weekly), 3 months (monthly)
+
+**Optimizations Applied:**
+- Local temp directory (/var/tmp) for backup staging before NFS write
+- Optimized NFS mount options for performance
+- Fixed script arithmetic issues for bash `set -e` compatibility
+- Container 100 backup: 2.5 hours → 36 seconds (250x faster!)
+
+**Monitoring:**
+- Logs: /var/log/homelab-backup.log on each host
+- Cron: /etc/cron.d/homelab-backup on each host
+
+**Documentation:**
+- guides/HOMELAB-BACKUP-STRATEGY.md - Complete 3-tier architecture
+- guides/BACKUP-QUICK-START.md - Quick implementation guide
+
+**Tier 2 & 3:** Planned (off-site external drives, Backblaze B2 cloud)
+
+---
+
 ### Authentik SSO ✅ DEPLOYED
 
 **Status:** Operational at 10.0.10.21:9000 (https://auth.nianticbooks.com)
@@ -253,13 +292,14 @@ git push
 **Active Integrations:**
 - ✅ Proxmox (all 3 hosts via OpenID Connect)
   - Client ID: `proxmox`
+  - **User fred@authentik has full Administrator role on all Proxmox hosts**
   - **Login: Select "authentik" from Realm dropdown, then click "Login with authentik" button**
   - Scope mappings: openid, email, profile
-  - Configured on: main-pve (10.0.10.3), gaming-pve (10.0.10.2), backup-pve (10.0.10.4)
+  - Configured on: main-pve (10.0.10.3), pve-router (10.0.10.2), pve-storage (10.0.10.4)
+- ✅ Grafana (OAuth2 configured, redirect URIs set for internal and public access)
 
 **Planned Integrations:**
 - ❌ n8n (OIDC SSO requires Enterprise license - not available in free self-hosted version)
-- Grafana (OAuth2)
 - Home Assistant (complex - requires proxy provider or LDAP)
 
 **Configuration via API:**
@@ -293,9 +333,17 @@ git push
 - **Home Assistant**: ✅ 10.0.10.24 - smart home automation
 - **ESPHome**: Runs as HA add-on (no longer separate VM)
 - **Dockge**: ✅ 10.0.10.27 - Docker compose management
-- **OpenMediaVault**: ✅ 10.0.10.5 - 12TB storage management
+- **OpenMediaVault**: ✅ 10.0.10.5 - 12TB storage management, NFS backup target
 - **Docker Host**: ✅ 10.0.10.29 - General Docker workloads
-- **pve-scripts-local**: ✅ 10.0.10.40 - Proxmox automation tools
+- **pve-scripts-local**: ✅ CT 100 on pve-router - Proxmox automation tools
+- **Twingate Connector**: ✅ CT 101 on pve-router - Zero-trust remote access (redundant to WireGuard/Caddy)
+
+### Removed/Consolidated Services
+
+- **CT 107 (dockge)**: ❌ Deleted 2025-12-26 - Empty container, no longer needed
+- **Old CT 101 (docker)**: ❌ Cleaned up 2025-12-26 - Removed old Authentik deployment, Portainer, newt, portracker
+  - Old containers replaced by LXC-based services
+  - Repurposed as Twingate connector
 
 ## Multi-Machine Git Workflow
 
