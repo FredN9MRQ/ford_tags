@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  dashboard:
+    image: nginx:alpine
+    container_name: homelab-dashboard
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/usr/share/nginx/html:ro
+    restart: unless-stopped
+    labels:
+      - "com.dockge.name=homelab-dashboard"
+      - "com.dockge.description=Simple dashboard for homelab resources"

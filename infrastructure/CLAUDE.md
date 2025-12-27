@@ -332,9 +332,16 @@ git push
 
 - **Home Assistant**: ✅ 10.0.10.24 - smart home automation
 - **ESPHome**: Runs as HA add-on (no longer separate VM)
-- **Dockge**: ✅ 10.0.10.27 - Docker compose management
+- **Dockge**: ✅ 10.0.10.27:5001 on main-pve (CT 127) - Docker Compose stack management with web UI
+  - Deployed 2025-12-27 in LXC container with Docker
+  - Resources: 2 cores, 2GB RAM, 8GB disk
+  - Manages all Docker stacks via web interface
+- **Homelab Dashboard**: ✅ 10.0.10.27:8080 on main-pve (via Dockge) - Simple web dashboard for quick resource access
+  - Clean, ADHD-friendly interface with color-coded resource cards
+  - Organized by priority: Management, Apps, Storage, Tools
+  - Mobile responsive, keyboard shortcuts (press 'h' to refresh)
+  - Accessible via Twingate when offsite
 - **OpenMediaVault**: ✅ 10.0.10.5 - 12TB storage management, NFS backup target
-- **Docker Host**: ✅ 10.0.10.29 - General Docker workloads
 - **pve-scripts-local**: ✅ CT 100 on pve-router - Proxmox automation tools
 - **Twingate Connector**: ✅ CT 101 on pve-router - Zero-trust remote access (redundant to WireGuard/Caddy)
 
